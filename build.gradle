@@ -1,0 +1,27 @@
+/*
+Compile java
+Run tests
+Run Software
+*/
+
+apply plugin: 'java' 
+
+repositories {
+	mavenCentral();
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	testCompile "junit:junit:4.12"
+}
+
+task run(type: JavaExec) {
+	main = 'RunEdgeConvert'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+
+
+
