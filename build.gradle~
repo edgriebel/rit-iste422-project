@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceSets {
+   main {
+      java {
+         srcDir 'src'
+      }
+   }
+	
+   test {
+      java {
+         srcDir 'test'
+      }
+   }
+}
+
+ext {
+    javaMainClass = 'Runner'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    implementation 'org.hamcrest:hamcrest:1.3'
+}
+
+//tasks.withType(JavaCompile) {
+	//includes = 
+//}
+
+application {
+	mainClassName = 'org.gradle.runedgeconvert.RunEdgeConvert'
+}
+
+run RunEdgeCovert
