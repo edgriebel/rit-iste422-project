@@ -1,0 +1,17 @@
+apply plugin: 'java'
+repositories {
+  mavenCentral()
+}
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'lib')
+ 
+}
+task runApp(type: JavaExec){
+	classpath = files("build/classes/java/main")
+	mainClass = "RunEdgeConvert"
+}
+task compile(type: JavaCompile){
+	println "compiling class files"
+	classpath = files("src/main/java/")
+	destinationDirectory = file("build/")
+}
