@@ -23,3 +23,8 @@
 hs_err_pid*
 
 nohup.out
+
+# omit bytecode
+build/
+# omit ide specific config
+.vscode/
