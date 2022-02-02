@@ -22,6 +22,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public void createDDL() {
+      System.out.println(this.getClass().getPackageName());
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");

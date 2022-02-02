@@ -1,10 +1,9 @@
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
 public class EdgeConnectorTest {
-	EdgeConnector testObj;
+	EdgeConnecter testObj;
 
 	@Before
 	public void setUp() throws Exception {
