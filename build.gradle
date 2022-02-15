@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+//    id 'pmd'
+}
+
+java.sourceCompatibility "VERSION_11"
+java.targetCompatibility "VERSION_11"
+
+group 'edu.rit.iste-422'
+version '1.0-SNAPSHOT'
+
+ext {
+    javaMainClass = 'RunEdgeConvert'
+}
+
+test {
+    testLogging.showStandardStreams = true
+}
+
+application {
+    mainClass = javaMainClass
+}
+
+repositories {
+    mavenCentral()
+}
+
+/*
+pmd {
+  ignoreFailures = true
+  consoleOutput = true
+  ruleSets = [
+	"category/java/errorprone.xml", 
+	// "category/java/design.xml", 
+	"category/java/performance.xml"
+	] 
+}
+*/
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    implementation 'org.apache.logging.log4j:log4j-api:2.13.3'
+    implementation 'org.apache.logging.log4j:log4j-core:2.13.3'
+}
