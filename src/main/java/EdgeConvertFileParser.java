@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class EdgeConvertFileParser {
    //private String filename = "test.edg";
    private File parseFile;
@@ -25,8 +28,12 @@ public class EdgeConvertFileParser {
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
+
+	 public static Logger logger = LogManager.getLogger(EdgeConvertFileParser.class.getName());
    
    public EdgeConvertFileParser(File constructorFile) {
+		  logger.debug("Creating EdgeConvertFileParser with constructorFile field.");
+		  logger.info("constructorFile: " + constructorFile.toString());
       numFigure = 0;
       numConnector = 0;
       alTables = new ArrayList();
@@ -40,6 +47,7 @@ public class EdgeConvertFileParser {
    }
 
    public void parseEdgeFile() throws IOException {
+		  logger.debug("method parseEdgeFile()");
       while ((currentLine = br.readLine()) != null) {
          currentLine = currentLine.trim();
          if (currentLine.startsWith("Figure ")) { //this is the start of a Figure entry
@@ -192,6 +200,7 @@ public class EdgeConvertFileParser {
    } // resolveConnectors()
    
    public void parseSaveFile() throws IOException { //this method is unclear and confusing in places
+		  logger.debug("method parseSaveFile()");
       StringTokenizer stTables, stNatFields, stRelFields, stNatRelFields, stField;
       EdgeTable tempTable;
       EdgeField tempField;
@@ -252,18 +261,23 @@ public class EdgeConvertFileParser {
    } // parseSaveFile()
 
    private void makeArrays() { //convert ArrayList objects into arrays of the appropriate Class type
+		  logger.debug("method makeArrays()");
       if (alTables != null) {
          tables = (EdgeTable[])alTables.toArray(new EdgeTable[alTables.size()]);
+				 logger.info("Tables: " + tables.toString());
       }
       if (alFields != null) {
          fields = (EdgeField[])alFields.toArray(new EdgeField[alFields.size()]);
+				 logger.info("Fields: " + fields.toString());
       }
       if (alConnectors != null) {
          connectors = (EdgeConnector[])alConnectors.toArray(new EdgeConnector[alConnectors.size()]);
+				 logger.info("Connectors: " + connectors.toString());
       }
    }
    
    private boolean isTableDup(String testTableName) {
+		  logger.debug("method isTableDup()");
       for (int i = 0; i < alTables.size(); i++) {
          EdgeTable tempTable = (EdgeTable)alTables.get(i);
          if (tempTable.getName().equals(testTableName)) {
@@ -274,15 +288,21 @@ public class EdgeConvertFileParser {
    }
    
    public EdgeTable[] getEdgeTables() {
+		  logger.debug("method getEdgeTables()");
+		  logger.info("Tables: " + tables.toString());
       return tables;
    }
    
    public EdgeField[] getEdgeFields() {
-      return fields;
+     logger.debug("method getEdgeFields()");
+		 logger.info("Fields: " + fields.toString()); 
+		 return fields;
    }
    
    public void openFile(File inputFile) {
+		  logger.debug("method openFile() with field inputFile.");
       try {
+				 logger.info("inputFile: " + inputFile.toString());
          fr = new FileReader(inputFile);
          br = new BufferedReader(fr);
          //test for what kind of file we have
@@ -304,10 +324,12 @@ public class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
+				 logger.error("FileNotFoundException in method openFile()");
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
+				 logger.error("IOException in method openFile()");
          System.out.println(ioe);
          System.exit(0);
       } // catch IOException
