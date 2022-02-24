@@ -19,6 +19,7 @@ public class EdgeTable {
       name = st.nextToken();
       alRelatedTables = new ArrayList();
       alNativeFields = new ArrayList();
+	   
 		  logger.info("EdgeField: " + this.toString());
    }
    
@@ -104,26 +105,42 @@ public class EdgeTable {
       sb.append("{\r\n");
       sb.append("TableName: " + name + "\r\n");
       sb.append("NativeFields: ");
-      for (int i = 0; i < nativeFields.length; i++) {
-         sb.append(nativeFields[i]);
-         if (i < (nativeFields.length - 1)){
-            sb.append(EdgeConvertFileParser.DELIM);
-         }
-      }
+	   // if nativeFields is null
+	   	// print null
+	   // else
+	   	// continue on to do for loop
+	   if(nativeFields == null){
+		   sb.append("null");
+	   }else{
+		   for (int i = 0; i < nativeFields.length; i++) {
+	         sb.append(nativeFields[i]);
+	         if (i < (nativeFields.length - 1)){
+	            sb.append(EdgeConvertFileParser.DELIM);
+	         }
+	      }
+	   }
       sb.append("\r\nRelatedTables: ");
-      for (int i = 0; i < relatedTables.length; i++) {
-         sb.append(relatedTables[i]);
-         if (i < (relatedTables.length - 1)){
-            sb.append(EdgeConvertFileParser.DELIM);
-         }
-      }
+	   if(relatedTables == null){
+		   sb.append("null");
+	   }else{
+	      for (int i = 0; i < relatedTables.length; i++) {
+	         sb.append(relatedTables[i]);
+	         if (i < (relatedTables.length - 1)){
+	            sb.append(EdgeConvertFileParser.DELIM);
+	         }
+	      }
+	   }
       sb.append("\r\nRelatedFields: ");
-      for (int i = 0; i < relatedFields.length; i++) {
-         sb.append(relatedFields[i]);
-         if (i < (relatedFields.length - 1)){
-            sb.append(EdgeConvertFileParser.DELIM);
-         }
-      }
+	   if(relatedFields == null){
+		   sb.append("null");
+	   }else{
+	      for (int i = 0; i < relatedFields.length; i++) {
+	         sb.append(relatedFields[i]);
+	         if (i < (relatedFields.length - 1)){
+	            sb.append(EdgeConvertFileParser.DELIM);
+	         }
+	      }
+	   }
       sb.append("\r\n}\r\n");
       
       return sb.toString();

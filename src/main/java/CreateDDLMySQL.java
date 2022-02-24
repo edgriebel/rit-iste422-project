@@ -17,13 +17,12 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
    protected StringBuffer sb;
 
-   public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {      
-     logger.debug("Creating CreateDDLMySQL with EdgeTable[] inputTables and EdgeField[] inputFields");
+   	public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {  
+		super(inputTables, inputFields);
+      	sb = new StringBuffer();
+     	logger.debug("Creating CreateDDLMySQL with EdgeTable[] inputTables and EdgeField[] inputFields");
       logger.info("inputTables = " + inputTables.toString());
       logger.info("inputFields = " + inputFields.toString());
-
-      super(inputTables, inputFields);
-      sb = new StringBuffer();
    } //CreateDDLMySQL(EdgeTable[], EdgeField[])
    
    public CreateDDLMySQL() { //default constructor with empty arg list for to allow output dir to be set before there are table and field objects
@@ -142,7 +141,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             return "";
          }
          if (databaseName.equals("")) {
-           logger.warning("No name entered for the database");
+           logger.warn("No name entered for the database");
             JOptionPane.showMessageDialog(null, "You must select a name for your database.");
          }
       } while (databaseName.equals(""));

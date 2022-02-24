@@ -62,7 +62,7 @@ public abstract class EdgeConvertCreateDDL {
             return tables[tIndex];
          }
       }
-      logger.warning("Can't find the value in the tables");
+      logger.warn("Can't find the value in the tables");
       return null;
    }
    
@@ -73,7 +73,7 @@ public abstract class EdgeConvertCreateDDL {
             return fields[fIndex];
          }
       }
-      logger.warning("Can't find the value in the fields");
+      logger.warn("Can't find the value in the fields");
       return null;
    }
 
