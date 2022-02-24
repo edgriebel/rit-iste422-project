@@ -9,6 +9,9 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class EdgeConvertGUI {
    
    public static final int HORIZ_SIZE = 635;
@@ -69,12 +72,16 @@ public class EdgeConvertGUI {
    static JMenuBar jmbDRMenuBar;
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
+
+	public static Logger logger = LogManager.getLogger(EdgeConvertGUI.class.getName());
    
    public EdgeConvertGUI() {
+		  logger.debug("Creating EdgeConvertGUI with listeners");
       menuListener = new EdgeMenuListener();
       radioListener = new EdgeRadioButtonListener();
       edgeWindowListener = new EdgeWindowListener();
       createDDLListener = new CreateDDLButtonListener();
+		  logger.debug("GUI listeners created");
       this.showGUI();
    } // EdgeConvertGUI.EdgeConvertGUI()
    
