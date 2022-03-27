@@ -94,6 +94,7 @@ public class EdgeField {
          varcharValue = value;
       }
    }
+	
    public int getDataType() {
       return dataType;
    }
