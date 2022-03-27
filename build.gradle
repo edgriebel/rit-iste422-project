@@ -4,8 +4,8 @@ plugins {
 //    id 'pmd'
 }
 
-java.sourceCompatibility "11"
-java.targetCompatibility "11"
+// java.sourceCompatibility "16"
+// java.targetCompatibility "16"
 
 group 'edu.rit.iste-422'
 version '1.0-SNAPSHOT'
