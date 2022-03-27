@@ -1007,14 +1007,14 @@ public class EdgeConvertGUI {
             if (resultClass.getSuperclass().getName().equals("EdgeConvertCreateDDL")) { //only interested in classes that extend EdgeConvertCreateDDL
                if (parseFile == null && saveFile == null) {
                   conResultClass = resultClass.getConstructor(paramTypesNull);
-                  objOutput = conResultClass.newInstance(null);
+                  objOutput = conResultClass.newInstance();
                   } else {
                   conResultClass = resultClass.getConstructor(paramTypes);
                   objOutput = conResultClass.newInstance(args);
                }
                alSubclasses.add(objOutput);
-               Method getProductName = resultClass.getMethod("getProductName", null);
-               String productName = (String)getProductName.invoke(objOutput, null);
+               Method getProductName = resultClass.getMethod("getProductName");
+               String productName = (String)getProductName.invoke(objOutput);
                alProductNames.add(productName);
             }
          }
@@ -1059,10 +1059,10 @@ public class EdgeConvertGUI {
 
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
-         Method getSQLString = selectedSubclass.getMethod("getSQLString", null);
-         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", null);
-         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
-         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], null);
+         Method getSQLString = selectedSubclass.getMethod("getSQLString");
+         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName");
+         strSQLString = (String)getSQLString.invoke(objSubclasses[selected]);
+         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected]);
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
       } catch (NoSuchMethodException nsme) {
