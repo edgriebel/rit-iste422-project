@@ -32,7 +32,7 @@ public class EdgeTable {
    }
    
    public void addRelatedTable(int relatedTable) {
-      alRelatedTables.add(new Integer(relatedTable));
+      alRelatedTables.add(relatedTable);
    }
    
    public int[] getRelatedTablesArray() {
@@ -52,7 +52,7 @@ public class EdgeTable {
    }
 
    public void addNativeField(int value) {
-      alNativeFields.add(new Integer(value));
+      alNativeFields.add(value);
    }
 
    public void moveFieldUp(int index) { //move the field closer to the beginning of the list

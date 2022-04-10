@@ -1,0 +1,34 @@
+EdgeConvert Save File
+#Tables#
+Table: 1
+{
+TableName: STUDENT
+NativeFields: 7|8
+RelatedTables: 
+RelatedFields: 0|0
+}
+
+Table: 2
+{
+TableName: FACULTY
+NativeFields: 11|6
+RelatedTables: 13
+RelatedFields: 0|0
+}
+
+Table: 13
+{
+TableName: COURSES
+NativeFields: 3|5
+RelatedTables: 2
+RelatedFields: 0|0
+}
+
+#Fields#
+3|Grade|13|0|0|0|1|false|false|
+4|CourseName|0|0|0|0|1|false|false|
+5|Number|13|0|0|0|1|false|false|
+6|FacSSN|2|0|0|0|1|false|false|
+7|StudentSSN|1|0|0|0|1|false|false|
+8|StudentName|1|0|0|0|1|false|false|
+11|FacultyName|2|0|0|0|1|false|false|

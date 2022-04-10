@@ -289,7 +289,7 @@ public class EdgeConvertFileParser {
    
    public EdgeTable[] getEdgeTables() {
 		  logger.debug("method getEdgeTables()");
-		  logger.info("Tables: " + tables.toString());
+		  // logger.info("Tables: " + tables.toString());
       return tables;
    }
    
@@ -320,6 +320,8 @@ public class EdgeConvertFileParser {
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
                JOptionPane.showMessageDialog(null, "Unrecognized file format");
+				br.close();
+            	this.makeArrays();
             }
          }
       } // try

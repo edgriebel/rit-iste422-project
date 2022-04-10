@@ -867,9 +867,11 @@ public class EdgeConvertGUI {
             String tempName = tables[tIndex].getName();
             dlmDTTablesAll.addElement(tempName);
             int[] relatedTables = tables[tIndex].getRelatedTablesArray();
-            if (relatedTables.length > 0) {
-               dlmDRTablesRelations.addElement(tempName);
-            }
+			 if(relatedTables != null){
+	            if (relatedTables.length > 0) {
+	               dlmDRTablesRelations.addElement(tempName);
+	            }
+			 }
          }
       }
       readSuccess = true;
