@@ -10,7 +10,7 @@ public class EdgeConvertFileParser {
    private File parseFile;
    private FileReader fr;
    private BufferedReader br;
-   // private String currentLine;
+   private String currentLine;
    private ArrayList alTables, alFields, alConnectors;
    private EdgeTable[] tables;
    private EdgeField[] fields;
@@ -20,7 +20,7 @@ public class EdgeConvertFileParser {
    // private String text;
    // private String tableName;
    // private String fieldName;
-   // private boolean isEntity, isAttribute, isUnderlined = false;
+   private boolean isEntity, isAttribute, isUnderlined = false;
    private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
    private int endPoint1, endPoint2;
    private int numLine;
