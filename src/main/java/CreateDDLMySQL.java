@@ -34,6 +34,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
+      sb.append("DROP DATABASE IF EXISTS " + databaseName + ";\r\n");
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
       sb.append("USE " + databaseName + ";\r\n");
       for (int boundCount = 0; boundCount <= maxBound; boundCount++) { //process tables in order from least dependent (least number of bound tables) to most dependent
@@ -57,7 +58,11 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                   if (!currentField.getDefaultValue().equals("")) {
                      if (currentField.getDataType() == 1) { //boolean data type
                         sb.append(" DEFAULT " + convertStrBooleanToInt(currentField.getDefaultValue()));
-                     } else { //any other data type
+                     }
+		     else if (currentField.getDataType() == 0) {
+			sb.append(" DEFAULT '" + currentField.getDefaultValue() + "'");
+		     }
+		     else { //any other data type
                         sb.append(" DEFAULT " + currentField.getDefaultValue());
                      }
                   }
@@ -70,7 +75,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                   if (currentField.getFieldBound() != 0) {
                      numForeignKey++;
                   }
-                  sb.append(",\r\n"); //end of field
+		  if (nativeFieldCount < nativeFields.length - 1 || numPrimaryKey > 0 || numForeignKey > 0) {
+		     sb.append(",");
+		  }
+                  sb.append("\r\n"); //end of field
                }
                if (numPrimaryKey > 0) { //table has primary key(s)
                   sb.append("CONSTRAINT " + tables[tableCount].getName() + "_PK PRIMARY KEY (");
@@ -114,7 +122,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       logger.debug("method convertSTrBooleanToInt(String input)");
       logger.info("input = " + input);
 
-      if (input.equals("true")) {
+      if (input.toLowerCase().equals("true")) {
          return 1;
       } else {
          return 0;
