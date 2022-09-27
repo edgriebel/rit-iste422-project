@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+repositories { 
+    mavenCentral() 
+}
+
+dependencies {
+    implementation files("lib/junit-4.12.jar")
+    implementation files("lib/hamcrest-core-1.3.jar")
+    testImplementation files("lib/junit-4.12.jar")
+    testImplementation files("lib/hamcrest-core-1.3.jar")
+}
+
+task run(type: JavaExec) {
+	main = 'RunEdgeConvert'
+	classpath = sourceSets.main.runtimeClasspath
+}
