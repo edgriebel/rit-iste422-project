@@ -1,0 +1,20 @@
+/*
+Compile java
+Run tests
+Build a JAR
+*/
+
+apply plugin: 'java'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testImplementation 'junit:junit:4.4'
+}
+
+task run(type: JavaExec) {
+	main = 'RunEdgeConvert'
+	classpath = sourceSets.main.runtimeClasspath
+}
