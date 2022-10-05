@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "build.gradle": [
+      {
+        "id": "190d4786-2145-4463-aede-1e3e45db06f5",
+        "line": 8,
+        "version": 17,
+        "index": 63
+      }
+    ]
+  }
 }
