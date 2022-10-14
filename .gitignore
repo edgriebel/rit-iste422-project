@@ -24,4 +24,5 @@ hs_err_pid*
 
 nohup.out
 
+# gradle
 .gradle/**
