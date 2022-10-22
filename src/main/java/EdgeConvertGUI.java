@@ -1157,7 +1157,6 @@ public class EdgeConvertGUI {
             if (jrbDataType[i].isSelected()) {
                currentDTField.setDataType(i);
                logger.debug("{} datatype has been set to {}", jrbDataType[i].getText(), currentDTField.getName());
-               logger.info("Client selected {}", jrbDataType[i].getText());
                break;
             }
          }
