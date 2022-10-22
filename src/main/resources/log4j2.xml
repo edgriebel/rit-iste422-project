@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <File name="Runner" fileName="runner.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </File>
+        <File name="Timer" fileName="timer.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+        </Root>
+        <Logger name="runner" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="Runner" level="debug" />
+        </Logger>
+        <Logger name="timer" level="info" additivity="false">
+            <AppenderRef ref="Timer" level="debug" />
+        </Logger>
+    </Loggers>
+</Configuration>
