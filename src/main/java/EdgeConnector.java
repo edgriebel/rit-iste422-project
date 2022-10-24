@@ -6,8 +6,8 @@ public class EdgeConnector {
    private String endStyle1, endStyle2;
    private boolean isEP1Field, isEP2Field, isEP1Table, isEP2Table;
 
-   private static final Logger logger = LogManager.getLogger("runner." + RunEdgeConvert.class.getName());
-   private static final Logger timeLogger = LogManager.getLogger("timer." + RunEdgeConvert.class.getName());
+   private static final Logger logger = LogManager.getLogger("runner." + EdgeConnector.class.getName());
+   private static final Logger timeLogger = LogManager.getLogger("timer." + EdgeConnector.class.getName());
       
    public EdgeConnector(String inputString) {
       timeLogger.info("Constructor called.");
