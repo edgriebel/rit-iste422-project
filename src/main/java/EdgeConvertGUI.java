@@ -75,14 +75,17 @@ public class EdgeConvertGUI {
    static Logger timeLogger = LogManager.getLogger("timer." + EdgeConvertGUI.class.getName());
 
    public EdgeConvertGUI() {
+      timeLogger.info("Constructor called.");
       menuListener = new EdgeMenuListener();
       radioListener = new EdgeRadioButtonListener();
       edgeWindowListener = new EdgeWindowListener();
       createDDLListener = new CreateDDLButtonListener();
       this.showGUI();
+      timeLogger.info("Constructor ended.");
    } // EdgeConvertGUI.EdgeConvertGUI()
 
    public void showGUI() {
+      timeLogger.info("showGUI called.");
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
          logger.debug("Started using the OS native LAF");
@@ -92,9 +95,12 @@ public class EdgeConvertGUI {
       }
       createDTScreen();
       createDRScreen();
+      timeLogger.info("showGUI called.");
    } //showGUI()
 
-   public void createDTScreen() {//create Define Tables screen
+   public void createDTScreen() {
+      //create Define Tables screen
+      timeLogger.info("createDTScreen called.");
       jfDT = new JFrame(DEFINE_TABLES);
       jfDT.setLocation(HORIZ_LOC, VERT_LOC);
       Container cp = jfDT.getContentPane();
@@ -478,10 +484,12 @@ public class EdgeConvertGUI {
       jpDTCenter.add(jpDTCenterRight);
       jfDT.getContentPane().add(jpDTCenter, BorderLayout.CENTER);
       jfDT.validate();
+      timeLogger.info("createDTScreen ended.");
    } //createDTScreen
 
    public void createDRScreen() {
       //create Define Relations screen
+      timeLogger.info("createDRScreen called.");
       jfDR = new JFrame(DEFINE_RELATIONS);
       jfDR.setSize(HORIZ_SIZE, VERT_SIZE);
       jfDR.setLocation(HORIZ_LOC, VERT_LOC);
@@ -730,6 +738,7 @@ public class EdgeConvertGUI {
       jpDRBottom.add(jbDRBindRelation);
       jpDRBottom.add(jbDRCreateDDL);
       jfDR.getContentPane().add(jpDRBottom, BorderLayout.SOUTH);
+      timeLogger.info("createDRScreen ended.");
    } //createDRScreen
 
    public static void setReadSuccess(boolean value) {
@@ -831,6 +840,7 @@ public class EdgeConvertGUI {
    }
 
    private void enableControls() {
+      timeLogger.info("enableControls called.");
       for (int i = 0; i < strDataType.length; i++) {
          jrbDataType[i].setEnabled(true);
       }
@@ -838,9 +848,11 @@ public class EdgeConvertGUI {
       jcheckDTDisallowNull.setEnabled(true);
       jbDTVarchar.setEnabled(true);
       jbDTDefaultValue.setEnabled(true);
+      timeLogger.info("enableControls ended.");
    }
 
    private void disableControls() {
+      timeLogger.info("disableControls called.");
       for (int i = 0; i < strDataType.length; i++) {
          jrbDataType[i].setEnabled(false);
       }
@@ -849,30 +861,39 @@ public class EdgeConvertGUI {
       jbDTDefaultValue.setEnabled(false);
       jtfDTVarchar.setText("");
       jtfDTDefaultValue.setText("");
+      timeLogger.info("disableControls ended.");
    }
 
    private void clearDTControls() {
+      timeLogger.info("clearDTControls() called.");
       jlDTTablesAll.clearSelection();
       jlDTFieldsTablesAll.clearSelection();
+      timeLogger.info("clearDTControls() ended.");
    }
 
    private void clearDRControls() {
+      timeLogger.info("clearDRControls() called.");
       jlDRTablesRelations.clearSelection();
       jlDRTablesRelatedTo.clearSelection();
       jlDRFieldsTablesRelations.clearSelection();
       jlDRFieldsTablesRelatedTo.clearSelection();
+      timeLogger.info("clearDRControls() ended.");
    }
 
    private void depopulateLists() {
+      timeLogger.info("depopulateLists() called.");
       dlmDTTablesAll.clear();
       dlmDTFieldsTablesAll.clear();
       dlmDRTablesRelations.clear();
       dlmDRFieldsTablesRelations.clear();
       dlmDRTablesRelatedTo.clear();
       dlmDRFieldsTablesRelatedTo.clear();
+      timeLogger.info("depopulateLists() ended.");
    }
 
    private void populateLists() {
+      timeLogger.info("populateLists() called.");
+
       if (readSuccess) {
          jfDT.setVisible(true);
          jfDR.setVisible(false);
@@ -889,9 +910,12 @@ public class EdgeConvertGUI {
       }
       readSuccess = true;
       logger.debug("Successfully read ({}) and populated the list", parseFile.getName());
+      timeLogger.info("populateLists() ended.");
    }
 
    private void saveAs() {
+      timeLogger.info("saveAs() called.");
+
       int returnVal;
       jfcEdge.addChoosableFileFilter(effSave);
       returnVal = jfcEdge.showSaveDialog(null);
@@ -917,9 +941,11 @@ public class EdgeConvertGUI {
          return;
       }
       writeSave();
+      timeLogger.info("saveAs() ended.");
    }
 
    private void writeSave() {
+      timeLogger.info("writeSave() called.");
       if (saveFile != null) {
          try {
             pw = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, false)));
@@ -949,9 +975,12 @@ public class EdgeConvertGUI {
          }
          dataSaved = true;
       }
+      timeLogger.info("writeSave() ended.");
    }
 
    private void setOutputDir() {
+      timeLogger.info("setOutputDir() called.");
+
       int returnVal;
       outputDirOld = outputDir;
       alSubclasses = new ArrayList();
@@ -986,17 +1015,22 @@ public class EdgeConvertGUI {
       JOptionPane.showMessageDialog(null, "The available products to create DDL statements are:\n" + displayProductNames());
       jmiDTOptionsShowProducts.setEnabled(true);
       jmiDROptionsShowProducts.setEnabled(true);
+      timeLogger.info("setOutputDir() ended.");
    }
 
    private String displayProductNames() {
+      timeLogger.info("displayProductNames() called.");
       StringBuffer sb = new StringBuffer();
       for (int i = 0; i < productNames.length; i++) {
          sb.append(productNames[i] + "\n");
       }
+      timeLogger.info("displayProductNames() ended.");
       return sb.toString();
    }
 
    private void getOutputClasses() {
+      timeLogger.info("getOutputClasses() called.");
+
       File[] resultFiles = {};
       Class resultClass = null;
       Class[] paramTypes = {EdgeTable[].class, EdgeField[].class};
@@ -1068,9 +1102,11 @@ public class EdgeConvertGUI {
          productNames = (String[])alProductNames.toArray(new String[alProductNames.size()]);
          objSubclasses = (Object[])alSubclasses.toArray(new Object[alSubclasses.size()]);
       }
+      timeLogger.info("getOutputClasses() ended.");
    }
 
    private String getSQLStatements() {
+      timeLogger.info("getSQLStatements() called.");
       String strSQLString = "";
       String response = (String)JOptionPane.showInputDialog(
                     null,
@@ -1108,11 +1144,13 @@ public class EdgeConvertGUI {
          logger.trace(ite.getMessage()); // not sure if it's neccessary to insert the log TRACE message here?
          ite.printStackTrace();
       }
-
+      
+      timeLogger.info("getSQLStatements() ended.");
       return strSQLString;
    }
 
    private void writeSQL(String output) {
+      timeLogger.info("writeSQL() called.");
       jfcEdge.resetChoosableFileFilters();
       String str;
       if (parseFile != null) {
@@ -1149,10 +1187,12 @@ public class EdgeConvertGUI {
             System.out.println(ioe);
          }
       }
+      timeLogger.info("writeSQL() ended.");
    }
 
    class EdgeRadioButtonListener implements ActionListener {
       public void actionPerformed(ActionEvent ae) {
+         timeLogger.info("EdgeRadioButtonListener.actionPerformed() called.");
          for (int i = 0; i < jrbDataType.length; i++) {
             if (jrbDataType[i].isSelected()) {
                currentDTField.setDataType(i);
@@ -1170,6 +1210,7 @@ public class EdgeConvertGUI {
          jtfDTDefaultValue.setText("");
          currentDTField.setDefaultValue("");
          dataSaved = false;
+         timeLogger.info("EdgeRadioButtonListener.actionPerformed() ended.");
       }
    }
 
@@ -1182,6 +1223,7 @@ public class EdgeConvertGUI {
       public void windowOpened(WindowEvent we) {}
 
       public void windowClosing(WindowEvent we) {
+         timeLogger.info("windowClosing() called.");
          if (!dataSaved) {
             int answer = JOptionPane.showOptionDialog(null,
                 "You currently have unsaved data. Would you like to save?",
@@ -1205,12 +1247,15 @@ public class EdgeConvertGUI {
                return;
             }
          }
+         logger.info("Exiting program.");
+         timeLogger.info("windowClosing() ended.");
          System.exit(0); //No was selected
       }
    }
 
    class CreateDDLButtonListener implements ActionListener {
       public void actionPerformed(ActionEvent ae) {
+         timeLogger.info("CreateDDLButtonListener.actionPerformed() called.");
          logger.info("Client selected Create DDL"); // working
          while (outputDir == null) {
             JOptionPane.showMessageDialog(null, "You have not selected a path that contains valid output definition files yet.\nPlease select a path now.");
@@ -1222,11 +1267,13 @@ public class EdgeConvertGUI {
             return;
          }
          writeSQL(sqlString);
+         timeLogger.info("CreateDDLButtonListener.actionPerformed() ended.");
       }
    }
 
    class EdgeMenuListener implements ActionListener {
       public void actionPerformed(ActionEvent ae) {
+         timeLogger.info("EdgeMenuListener.actionPerformed() called.");
          int returnVal;
          if ((ae.getSource() == jmiDTOpenEdge) || (ae.getSource() == jmiDROpenEdge)) {
             logger.info("Client selected File -> Open Edge File");
@@ -1354,6 +1401,7 @@ public class EdgeConvertGUI {
                                                 "by Stephen A. Capperell\n" +
                                                 " 2007-2008");
          }
+         timeLogger.info("EdgeMenuListener.actionPerformed() ended.");
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
 } // EdgeConvertGUI
