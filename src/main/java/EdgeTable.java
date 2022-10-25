@@ -1,17 +1,30 @@
 import java.util.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class EdgeTable {
    private int numFigure;
    private String name;
    private ArrayList alRelatedTables, alNativeFields;
    private int[] relatedTables, relatedFields, nativeFields;
+
+   public static Logger logger = LogManager.getLogger(EdgeTable.class.getName());
+   public static Logger timeLogger = LogManager.getLogger("timer." + EdgeTable.class.getName());
    
    public EdgeTable(String inputString) {
+      timeLogger.info("Constructor called.");
+      logger.debug(String.format("Constructor called with inputString: %s", inputString));
+
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
       alRelatedTables = new ArrayList();
       alNativeFields = new ArrayList();
+
+      logger.debug(String.format("EdgeTable with numFigure '%d' and name '%s' created.", numFigure, name));
+
+      timeLogger.info("Constructor ended.");
    }
    
    public int getNumFigure() {
