@@ -5,6 +5,9 @@ import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
    protected String databaseName;
