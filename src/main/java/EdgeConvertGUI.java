@@ -8,7 +8,8 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeConvertGUI {
 
@@ -1144,7 +1145,7 @@ public class EdgeConvertGUI {
          logger.trace(ite.getMessage()); // not sure if it's neccessary to insert the log TRACE message here?
          ite.printStackTrace();
       }
-      
+
       timeLogger.info("getSQLStatements() ended.");
       return strSQLString;
    }

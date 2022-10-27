@@ -1,5 +1,6 @@
 import java.util.StringTokenizer;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeConnector {
    private int numConnector, endPoint1, endPoint2;
