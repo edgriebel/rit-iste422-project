@@ -5,6 +5,9 @@ import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public abstract class EdgeConvertCreateDDL {
    static String[] products = {"MySQL"};
    protected EdgeTable[] tables; //master copy of EdgeTable objects
@@ -14,10 +17,15 @@ public abstract class EdgeConvertCreateDDL {
    protected StringBuffer sb;
    protected int selected;
    
+	public static Logger logger = LogManager.getLogger(EdgeConvertCreateDDL.class.getName());
+   public static Logger timeLogger = LogManager.getLogger("timer." + EdgeConvertCreateDDL.class.getName());
+
    public EdgeConvertCreateDDL(EdgeTable[] tables, EdgeField[] fields) {
+		timeLogger.info("Constructor called.");
       this.tables = tables;
       this.fields = fields;
       initialize();
+		timeLogger.info("Constructor ended.");
    } //EdgeConvertCreateDDL(EdgeTable[], EdgeField[])
    
    public EdgeConvertCreateDDL() { //default constructor with empty arg list for to allow output dir to be set before there are table and field objects
@@ -25,6 +33,7 @@ public abstract class EdgeConvertCreateDDL {
    } //EdgeConvertCreateDDL()
 
    public void initialize() {
+		timeLogger.info("method initialize called.");
       numBoundTables = new int[tables.length];
       maxBound = 0;
       sb = new StringBuffer();
@@ -42,23 +51,32 @@ public abstract class EdgeConvertCreateDDL {
             maxBound = numBound;
          }
       }
+	   timeLogger.info("method initialize ended");
    }
    
    protected EdgeTable getTable(int numFigure) {
+		timeLogger.info("method getTable called.");
       for (int tIndex = 0; tIndex < tables.length; tIndex++) {
          if (numFigure == tables[tIndex].getNumFigure()) {
+            logger.debug("returning "+tIndex);
+            timeLogger.info("method getTable ended."); 
             return tables[tIndex];
          }
       }
+		timeLogger.info("method getTable ended.");
       return null;
    }
    
    protected EdgeField getField(int numFigure) {
+		timeLogger.info("method getField called.");
       for (int fIndex = 0; fIndex < fields.length; fIndex++) {
          if (numFigure == fields[fIndex].getNumFigure()) {
+            logger.debug("returning "+tIndex);
+            timeLogger.info("method getField ended.");
             return fields[fIndex];
          }
       }
+		timeLogger.info("method getField ended.");
       return null;
    }
 

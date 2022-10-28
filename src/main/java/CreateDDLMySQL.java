@@ -5,12 +5,18 @@ import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
    protected String databaseName;
    //this array is for determining how MySQL refers to datatypes
    protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
    protected StringBuffer sb;
+   
+   public static Logger logger = LogManager.getLogger(EdgeConvertCreateDDL.class.getName());
+   public static Logger timeLogger = LogManager.getLogger("timer." + EdgeConvertCreateDDL.class.getName());
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
@@ -22,6 +28,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public void createDDL() {
+      timeLogger.info("Constructor called.");
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
@@ -30,6 +37,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
          for (int tableCount = 0; tableCount < numBoundTables.length; tableCount++) { //step through list of tables
             if (numBoundTables[tableCount] == boundCount) { //
                sb.append("CREATE TABLE " + tables[tableCount].getName() + " (\r\n");
+               logger.debug("creating table"+tables[tableCount].getName());
                int[] nativeFields = tables[tableCount].getNativeFieldsArray();
                int[] relatedFields = tables[tableCount].getRelatedFieldsArray();
                boolean[] primaryKey = new boolean[nativeFields.length];
@@ -98,17 +106,22 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             }
          }
       }
+      timeLogger.info("Constructor ended.");
    }
 
    protected int convertStrBooleanToInt(String input) { //MySQL uses '1' and '0' for boolean types
+      timeLogger.info("method convertStrBooleanToInt called.");
       if (input.equals("true")) {
+         timeLogger.info("method convertStrBooleanToInt ended.");
          return 1;
       } else {
+         timeLogger.info("method convertStrBooleanToInt ended.");
          return 0;
       }
    }
    
    public String generateDatabaseName() { //prompts user for database name
+      timeLogger.info("method generateDatabaseName called.");
       String dbNameDefault = "MySQLDB";
       //String databaseName = "";
 
@@ -129,6 +142,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             JOptionPane.showMessageDialog(null, "You must select a name for your database.");
          }
       } while (databaseName.equals(""));
+      timeLogger.info("method generateDatabaseName ended.");
       return databaseName;
    }
    
