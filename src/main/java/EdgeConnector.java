@@ -1,11 +1,17 @@
 import java.util.StringTokenizer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeConnector {
    private int numConnector, endPoint1, endPoint2;
    private String endStyle1, endStyle2;
    private boolean isEP1Field, isEP2Field, isEP1Table, isEP2Table;
+
+   private static final Logger logger = LogManager.getLogger("runner." + EdgeConnector.class.getName());
+   private static final Logger timeLogger = LogManager.getLogger("timer." + EdgeConnector.class.getName());
       
    public EdgeConnector(String inputString) {
+      timeLogger.info("Constructor called.");
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numConnector = Integer.parseInt(st.nextToken());
       endPoint1 = Integer.parseInt(st.nextToken());
@@ -16,21 +22,26 @@ public class EdgeConnector {
       isEP2Field = false;
       isEP1Table = false;
       isEP2Table = false;
+      timeLogger.info("Constructor ended.");
    }
    
    public int getNumConnector() {
+      logger.debug("return from getNumConnector() - {}", numConnector);
       return numConnector;
    }
    
    public int getEndPoint1() {
+      logger.debug("return from getEndPoint1() - {}", endPoint1);
       return endPoint1;
    }
    
    public int getEndPoint2() {
+      logger.debug("return from getEndPoint2() - {}", endPoint2);
       return endPoint2;
    }
    
    public String getEndStyle1() {
+      logger.debug("return from getEndStyle1() - {}", endStyle1);
       return endStyle1;
    }
    

@@ -46,10 +46,10 @@ pmd {
   ignoreFailures = true
   consoleOutput = true
   ruleSets = [
-	"category/java/errorprone.xml", 
-	// "category/java/design.xml", 
+	"category/java/errorprone.xml",
+	// "category/java/design.xml",
 	"category/java/performance.xml"
-	] 
+	]
 }
 
 dependencies {
