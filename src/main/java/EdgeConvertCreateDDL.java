@@ -71,7 +71,7 @@ public abstract class EdgeConvertCreateDDL {
 		timeLogger.info("method getField called.");
       for (int fIndex = 0; fIndex < fields.length; fIndex++) {
          if (numFigure == fields[fIndex].getNumFigure()) {
-            logger.debug("returning "+tIndex);
+            logger.debug("returning "+ fIndex);
             timeLogger.info("method getField ended.");
             return fields[fIndex];
          }
