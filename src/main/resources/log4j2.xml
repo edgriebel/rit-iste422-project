@@ -6,6 +6,8 @@
         </Console>
         <File name="Runner" fileName="runner.log" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL" />
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
         </File>
         <File name="Timer" fileName="timer.log" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %logger{36} - %msg%n"/>
