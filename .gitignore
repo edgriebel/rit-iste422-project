@@ -27,3 +27,6 @@ nohup.out
 
 # gradle
 .gradle/**
+
+#vscode
+.vscode/
