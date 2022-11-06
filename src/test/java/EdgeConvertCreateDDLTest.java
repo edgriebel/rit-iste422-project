@@ -8,13 +8,21 @@ public class EdgeConvertCreateDDLTest {
     EdgeTable[] tables;
     EdgeField[] fields;
 
+    EdgeTable table1;
+    EdgeTable table2;
+    EdgeTable table3;
+
+    EdgeField field1;;
+    EdgeField field2;
+    EdgeField field3;
+
     @Before
     public void setup() {
 
         tables = new EdgeTable[3];
-        EdgeTable table1 = new EdgeTable("0|TEST");
-        EdgeTable table2 = new EdgeTable("1|JUNIT");
-        EdgeTable table3 = new EdgeTable("999|JAVA");
+        table1 = new EdgeTable("0|TEST");
+        table2 = new EdgeTable("1|JUNIT");
+        table3 = new EdgeTable("999|JAVA");
         table1.makeArrays();
         table2.makeArrays();
         table3.makeArrays();
@@ -23,9 +31,9 @@ public class EdgeConvertCreateDDLTest {
         tables[2] = table3;
 
         fields = new EdgeField[3];
-        EdgeField field1 = new EdgeField("0|Test");
-        EdgeField field2 = new EdgeField("5|Junit");
-        EdgeField field3 = new EdgeField("999|Java");
+        field1 = new EdgeField("0|Test");
+        field2 = new EdgeField("5|Junit");
+        field3 = new EdgeField("999|Java");
         fields[0] = field1;
         fields[1] = field2;
         fields[2] = field3;
@@ -61,50 +69,43 @@ public class EdgeConvertCreateDDLTest {
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure0ContainsNameTEST() {
-        EdgeTable table = eccd.getTable(0);
-        assertEquals("table with numFigure 0 should have name TEST", table.getName(), "TEST");
+        assertEquals("table with numFigure 0 should have name TEST", eccd.getTable(0), table1);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure1ContainsNameJUNIT() {
-        EdgeTable table = eccd.getTable(1);
-        assertEquals("table with numFigure 1 should have name JUNIT", table.getName(), "JUNIT");
+        assertEquals("table with numFigure 1 should have name JUNIT", eccd.getTable(1), table2);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure999ContainsNameJAVA() {
-        EdgeTable table = eccd.getTable(999);
-        assertEquals("table with numFigure 999 should have name JAVA", table.getName(), "JAVA");
+        assertEquals("table with numFigure 999 should have name JAVA", eccd.getTable(999), table3);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure3shouldBeNull() {
         EdgeTable table = eccd.getTable(3);
-        assertEquals("table with numFigure 3 should be null", table, null);
+        assertEquals("table with numFigure 3 should be null", eccd.getTable(3), null);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure0ContainsNameTest() {
-        EdgeField field = eccd.getField(0);
-        assertEquals("field with numFigure 0 should have name Test", field.getName(), "Test");
+        assertEquals("field with numFigure 0 should have name Test", eccd.getField(0), field1);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure5ContainsNameJunit() {
-        EdgeField field = eccd.getField(5);
-        assertEquals("field with numFigure 5 should have named Junit", field.getName(), "Junit");
+        assertEquals("field with numFigure 5 should have named Junit", eccd.getField(5), field2);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure999ContainsNameJava() {
-        EdgeField field = eccd.getField(999);
-        assertEquals("field with numFigure 999 should have named Java", field.getName(), "Java");
+        assertEquals("field with numFigure 999 should have named Java", eccd.getField(999), field3);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure4shouldBeNull() {
-        EdgeField field = eccd.getField(4);
-        assertEquals("eccd shouldnt have a field at index 4", field, null);
+        assertEquals("field with numFigure 4 should be null", eccd.getField(4), null);
     }
 
     @Test
