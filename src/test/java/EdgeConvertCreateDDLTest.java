@@ -70,37 +70,42 @@ public class EdgeConvertCreateDDLTest {
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure0ContainsNameTEST() {
         assertEquals("table with numFigure 0 should have name TEST", eccd.getTable(0), table1);
+        assertEquals("numFigure should be 0", eccd.getTable(0).getNumFigure(), 0);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure1ContainsNameJUNIT() {
         assertEquals("table with numFigure 1 should have name JUNIT", eccd.getTable(1), table2);
+        assertEquals("numFigure should be 1", eccd.getTable(1).getNumFigure(), 1);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure999ContainsNameJAVA() {
         assertEquals("table with numFigure 999 should have name JAVA", eccd.getTable(999), table3);
+        assertEquals("numFigure should be 999", eccd.getTable(999).getNumFigure(), 999);
     }
 
     @Test
     public void givenCreateDDLMySQLWithTableNumFigure3shouldBeNull() {
-        EdgeTable table = eccd.getTable(3);
         assertEquals("table with numFigure 3 should be null", eccd.getTable(3), null);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure0ContainsNameTest() {
         assertEquals("field with numFigure 0 should have name Test", eccd.getField(0), field1);
+        assertEquals("numFigure should be 0", eccd.getField(0).getNumFigure(), 0);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure5ContainsNameJunit() {
         assertEquals("field with numFigure 5 should have named Junit", eccd.getField(5), field2);
+        assertEquals("numFigure should be 5", eccd.getField(5).getNumFigure(), 5);
     }
 
     @Test
     public void givenCreateDDLMySQLWithFieldNumFigure999ContainsNameJava() {
         assertEquals("field with numFigure 999 should have named Java", eccd.getField(999), field3);
+        assertEquals("numFigure should be 999", eccd.getField(999).getNumFigure(), 999);
     }
 
     @Test
@@ -109,7 +114,7 @@ public class EdgeConvertCreateDDLTest {
     }
 
     @Test
-    public void givenAnyCreateDDLMySQLWithProductArray() {
+    public void givenAnyCreateDDLMySQLWithDefaultProductArray() {
         String[] products = { "MySQL" };
         assertArrayEquals("", EdgeConvertCreateDDL.products, products);
     }
