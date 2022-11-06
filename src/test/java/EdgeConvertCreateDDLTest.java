@@ -56,7 +56,7 @@ public class EdgeConvertCreateDDLTest {
 
     @Test
     public void givenCreateDDLMySQLWithTwoBoundTables() {
-        assertEquals("numBoundTables length should be two", eccd.numBoundTables.length, 2);
+        assertEquals("numBoundTables length should be three", eccd.numBoundTables.length, 3);
     }
 
     @Test
