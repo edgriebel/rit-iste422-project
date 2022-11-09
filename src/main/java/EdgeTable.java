@@ -7,7 +7,7 @@ public class EdgeTable {
    private int numFigure;
    private String name;
    private ArrayList alRelatedTables, alNativeFields;
-   private int[] relatedTables, relatedFields, nativeFields;
+   protected int[] relatedTables, relatedFields, nativeFields;
 
    public static Logger logger = LogManager.getLogger(EdgeTable.class.getName());
    public static Logger timeLogger = LogManager.getLogger("timer." + EdgeTable.class.getName());
