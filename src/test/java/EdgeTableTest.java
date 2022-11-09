@@ -23,7 +23,6 @@ public class EdgeTableTest {
         String inputString = "22|TestName";
 
         EdgeTable et = new EdgeTable(inputString);
-        // reference to old array
         et.addNativeField(22);        
         et.addNativeField(33);     
         et.addNativeField(44);  
@@ -47,7 +46,6 @@ public class EdgeTableTest {
             System.out.println(et.nativeFields[i]);
         }
         
-        // assert that old array's 2nd index is equal to new array's first index
         assertEquals("Checking if the property has been moved up", et.nativeFields[0], secondIndex);
     }
 
@@ -57,7 +55,6 @@ public class EdgeTableTest {
         String inputString = "22|TestName";
 
         EdgeTable et = new EdgeTable(inputString);
-        // reference to old array
         et.addNativeField(22);        
         et.addNativeField(33);     
         et.addNativeField(44);  
@@ -81,7 +78,6 @@ public class EdgeTableTest {
             System.out.println(et.nativeFields[i]);
         }
         
-        // assert that old array's 2nd index is equal to new array's first index
         assertEquals("Checking if the property has been moved down", et.nativeFields[0], secondIndex);
     }
 
@@ -102,14 +98,19 @@ public class EdgeTableTest {
         //Makes arrays
         et.makeArrays();
         
-        assertEquals("Checking if the native propery fields includes same values", 22, et.nativeFields[0]);
-        assertEquals("Checking if the related tables includes same values", 6, et.relatedTables[0]);
-        // assertEquals("Checking if the related tables includes same values", et.relatedFields, 0);
+        assertEquals(et.alNativeFields.size(), et.nativeFields.length);
+        assertEquals(et.alRelatedTables.size(), et.relatedTables.length);
+        assertEquals(et.relatedFields.length, et.nativeFields.length);
 
+        for(int i = 0; i > et.alNativeFields.size(); i++){
+            assertEquals(et.nativeFields[i], et.alNativeFields.get(i));
+        }
+        for(int i = 0; i > et.alRelatedTables.size(); i++){
+            assertEquals(et.relatedTables[i], et.alRelatedTables.get(i));
+        }
+
+        for(int i = 0; i > et.relatedFields.length; i++){
+            assertEquals(0, et.relatedFields[i]);
+        }
     }
-
-    // @Test
-    // public void givenEdgeTableHasCorrectStringName(){
-    //     assertEquals("Checking the correct figure number", ett.EdgeTable.name);
-    // }
 }

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 public class EdgeTable {
    private int numFigure;
    private String name;
-   private ArrayList alRelatedTables, alNativeFields;
+   protected ArrayList alRelatedTables, alNativeFields;
    protected int[] relatedTables, relatedFields, nativeFields;
 
    public static Logger logger = LogManager.getLogger(EdgeTable.class.getName());
