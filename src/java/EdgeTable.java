@@ -1,3 +1,5 @@
+package src.java;
+
 import java.util.*;
 
 public class EdgeTable {
