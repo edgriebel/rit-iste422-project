@@ -3,10 +3,10 @@
 
 // import org.junit.Before;
 // import org.junit.Test;
-package src.test.java;
+// package src.test.java;
 import static org.junit.Assert.*;
 
-import src.main.java.EdgeConnector;  
+// import src.main.java.EdgeConnector;  
 
 import org.junit.Before;
 import org.junit.Test;
