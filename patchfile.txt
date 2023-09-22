@@ -1,0 +1,50 @@
+11c11
+< //Node JS dependencies for reading and writing files to the file system.
+---
+> //Node JS dependencies for reading and writing files to the file system. --revised here
+13,18c13,22
+< //Read the file from the file system
+< var obj = JSON.parse(fs.readFileSync('./data.json','utf8'));
+< //get the date from the first item.
+< var date = new Date(obj[0].timestamp);
+< //format the date to the YYYYMMDD.csv required for the submission.
+< var datef = date.getFullYear() + pad2(date.getMonth()+1) + pad2(date.getDate());
+---
+> var jsondata = process.argv[2];
+> 
+> //Read and parse the file from the file system --revised here
+> var obj = fs.readFileSync(jsondata);
+> const jsonparsing = JSON.parse(obj);
+> 
+> //format the date to the YYYYMMDD.csv required for the submission. --revised here
+> var dt = Date.now()
+> var datef = new Date(dt)
+> 
+20a25
+> 
+22c27
+< for(var i = 0; i < obj.length; i++){
+---
+> for(var i = 0; i < jsonparsing.length; i++){
+24,27c29,32
+<   var item = obj[i];
+<   //check if item has a creditcard then save the :name and :creditcard to the cvs object in the cvs format
+<   if(item.creditcard != null){
+<     csv += item.name + "," + item.creditcard + "\n";
+---
+>   var item = jsonparsing[i];
+>   //check if item has a creditcard and email then save the :name and :creditcard and :email to the csv object in the csv format --revised here
+>   if(item.email != null && item.creditcard != null){
+>     csv += item.name + "," + item.email + "," + item.creditcard + "\n";
+31,32c36,37
+< //store the compiled cvs in a file formated YYYYMMDD.csv
+< fs.writeFile("./" + datef + ".csv", csv, function(err) {
+---
+> //store the compiled csv in a file formated YYYYMMDD.csv --revised here
+> fs.writeFile("./" + datef.getFullYear() + addzero(datef.getMonth() + 1) + addzero(datef.getDate()) + ".csv", csv, function(err) {
+39,40c44,45
+< //formating functino for manking numbebers 2 digits ex "2" -> "02"
+< function pad2(number) {
+---
+> //formating function for making numbers 2 digits ex "2" -> "02" --revised here
+> function addzero(number) {
