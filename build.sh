@@ -8,9 +8,8 @@ rm -f *.class
 find . -name \*.class -exec rm {} \;
 
 echo "Compiling source code and unit tests..."
-# javac -classpath .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar src/main/java/*.java src/test/java/*.java -d build
-javac -classpath .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar -sourcepath src/main/java -d build src/main/java/*.java
-javac -classpath .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar -sourcepath src/test/java -d build src/test/java/*.java
+javac -classpath .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar src/main/java/*.java src/test/java/*.java -d build
+
 
 if [ $? -ne 0 ] ; then echo BUILD FAILED!; exit 1; fi
 
