@@ -1,0 +1,25 @@
+Cleaning existing classes...
+Compiling source code and unit tests...
+Running unit tests...
+JUnit version 4.12
+.E
+Time: 0.001
+There was 1 failure:
+1) initializationError(org.junit.runner.JUnitCommandLineParseResult)
+java.lang.IllegalArgumentException: Could not find class [test/java/EdgeConnectorTest]
+	at org.junit.runner.JUnitCommandLineParseResult.parseParameters(JUnitCommandLineParseResult.java:102)
+	at org.junit.runner.JUnitCommandLineParseResult.parseArgs(JUnitCommandLineParseResult.java:50)
+	at org.junit.runner.JUnitCommandLineParseResult.parse(JUnitCommandLineParseResult.java:44)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:72)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+Caused by: java.lang.ClassNotFoundException: test/java/EdgeConnectorTest
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at org.junit.internal.Classes.getClass(Classes.java:16)
+	at org.junit.runner.JUnitCommandLineParseResult.parseParameters(JUnitCommandLineParseResult.java:100)
+	... 4 more
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+TESTS FAILED!
