@@ -1,11 +1,7 @@
 // package src.main.java;
-
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;   
-import javax.swing.event.*;
-import java.io.*;
-import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
@@ -13,6 +9,8 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    //this array is for determining how MySQL refers to datatypes
    protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
    protected StringBuffer sb;
+   private static Logger logger = LogManager.getLogger(EdgeConnector.class.getName());
+
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
@@ -125,24 +123,29 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                        dbNameDefault);
          if (databaseName == null) {
             EdgeConvertGUI.setReadSuccess(false);
+            logger.error("Database name is NULL");
             return "";
          }
          if (databaseName.equals("")) {
             JOptionPane.showMessageDialog(null, "You must select a name for your database.");
+            logger.error("Database name is blank");
          }
       } while (databaseName.equals(""));
       return databaseName;
    }
    
    public String getDatabaseName() {
+      logger.debug("Getting database name");
       return databaseName;
    }
    
    public String getProductName() {
+      logger.debug("Getting product name");
       return "MySQL";
    }
 
    public String getSQLString() {
+      logger.debug("Getting SQL string");
       createDDL();
       return sb.toString();
    }

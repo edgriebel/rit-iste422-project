@@ -1,2 +1,20 @@
 Starting application class RunEdgeConvert
 Starting application class RunEdgeConvert
+getting end point1
+getting second end point
+getting end style 1
+getting end style 2
+getting number connector
+getting if end point 1 is a field
+getting if end point 1 is a table
+getting if end point 2 is a field
+getting if end point 2 is a table
+setting if end point 1 is a field
+getting if end point 1 is a field
+setting if end point 1 is a table
+getting if end point 1 is a table
+setting if end point 2 is a field
+getting if end point 2 is a field
+setting if end point 2 is a table
+getting if end point 2 is a table
+Starting application class RunEdgeConvert
