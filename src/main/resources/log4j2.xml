@@ -5,9 +5,33 @@
             <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
         </Console>
     </Appenders>
+    <Appenders>
+        <File name="Debug" fileName="debugLogs.txt" append="true">
+            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+        </File>
+    </Appenders>
+    <Appenders>
+        <File name="Info" fileName="infoLogs.txt" append="true">
+            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+        </File>
+    </Appenders>
+    <Appenders>
+        <File name="Warning" fileName="warningLogs.txt" append="true">
+            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+        </File>
+    </Appenders>
+    <Appenders>
+        <File name="Error" fileName="errorLogs.txt" append="true">
+            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+        </File>
+    </Appenders>
     <Loggers>
         <Root level="debug">
             <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="Debug" level="debug"/>
+            <AppenderRef ref="Info" level="info"/>
+            <AppenderRef ref="Warning" level="warning"/>
+            <AppenderRef ref="Error" level="error"/>
         </Root>
     </Loggers>
 </Configuration>
