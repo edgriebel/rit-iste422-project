@@ -7,22 +7,22 @@
     </Appenders>
     <Appenders>
         <File name="Debug" fileName="debugLogs.txt" append="true">
-            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+            <!-- <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" /> -->
         </File>
     </Appenders>
     <Appenders>
         <File name="Info" fileName="infoLogs.txt" append="true">
-            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+            <!-- <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" /> -->
         </File>
     </Appenders>
     <Appenders>
         <File name="Warning" fileName="warningLogs.txt" append="true">
-            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+            <!-- <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" /> -->
         </File>
     </Appenders>
     <Appenders>
         <File name="Error" fileName="errorLogs.txt" append="true">
-            <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" />
+            <!-- <PatternLayout pattern="%d{hh:mm:ss.SSS} %level class:%logger{36} - %msg%n" /> -->
         </File>
     </Appenders>
     <Loggers>
