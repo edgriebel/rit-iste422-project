@@ -23,3 +23,12 @@
 hs_err_pid*
 
 nohup.out
+
+.DS_Store
+
+# Git ignore for gradle projs
+
+.gradle/
+build/
+!**/docs/**/build/
+!**/src/**/build/
