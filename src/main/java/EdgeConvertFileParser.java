@@ -3,6 +3,9 @@
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 public class EdgeConvertFileParser {
    //private String filename = "test.edg";
@@ -27,6 +30,8 @@ public class EdgeConvertFileParser {
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
+   private static Logger logger = LogManager.getLogger(EdgeConvertFileParser.class);
+   
    
    public EdgeConvertFileParser(File constructorFile) {
       numFigure = 0;
@@ -55,6 +60,7 @@ public class EdgeConvertFileParser {
                if (style.startsWith("Relation")) { //presence of Relations implies lack of normalization
                   JOptionPane.showMessageDialog(null, "The Edge Diagrammer file\n" + parseFile + "\ncontains relations.  Please resolve them and try again.");
                   EdgeConvertGUI.setReadSuccess(false);
+                  // logger.atError().log("")
                   break;
                } 
                if (style.startsWith("Entity")) {
