@@ -23,66 +23,66 @@ public class EdgeConnector {
    }
    
    public int getNumConnector() {
-      logger.debug("getting number connector {}");
+      logger.debug("getting number connector");
       return numConnector;
    }
    
    public int getEndPoint1() {
-      logger.debug("getting end point1 {}");
+      logger.debug("getting end point1");
       return endPoint1;
    }
    
    public int getEndPoint2() {
-      logger.debug("getting second end point {}");
+      logger.debug("getting second end point");
       return endPoint2;
    }
    
    public String getEndStyle1() {
-      logger.debug("getting end style 1 {}");
+      logger.debug("getting end style 1");
       return endStyle1;
    }
    
    public String getEndStyle2() {
-      logger.debug("getting end style 2 {}");
+      logger.debug("getting end style 2");
       return endStyle2;
    }
    public boolean getIsEP1Field() {
-      logger.debug("getting if end point 1 is a field {}");
+      logger.debug("getting if end point 1 is a field");
       return isEP1Field;
    }
    
    public boolean getIsEP2Field() {
-      logger.debug("getting if end point 2 is a field {}");
+      logger.debug("getting if end point 2 is a field");
       return isEP2Field;
    }
 
    public boolean getIsEP1Table() {
-      logger.debug("getting if end point 1 is a table {}");
+      logger.debug("getting if end point 1 is a table");
       return isEP1Table;
    }
 
    public boolean getIsEP2Table() {
-      logger.debug("getting if end point 2 is a table {}");
+      logger.debug("getting if end point 2 is a table");
       return isEP2Table;
    }
 
    public void setIsEP1Field(boolean value) {
-      logger.debug("setting if end point 1 is a field {}");
+      logger.debug("setting if end point 1 is a field");
       isEP1Field = value;
    }
    
    public void setIsEP2Field(boolean value) {
-      logger.debug("setting if end point 2 is a field {}");
+      logger.debug("setting if end point 2 is a field");
       isEP2Field = value;
    }
 
    public void setIsEP1Table(boolean value) {
-      logger.debug("setting if end point 1 is a table {}");
+      logger.debug("setting if end point 1 is a table");
       isEP1Table = value;
    }
 
    public void setIsEP2Table(boolean value) {
-      logger.debug("setting if end point 2 is a table {}");
+      logger.debug("setting if end point 2 is a table");
       isEP2Table = value;
    }
 }
