@@ -10,6 +10,8 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeConvertGUI {
    
@@ -72,6 +74,8 @@ public class EdgeConvertGUI {
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
    
+   private static java.util.logging.Logger logger = LogManager.getLogger(EdgeConnector.class.getName());
+
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
       radioListener = new EdgeRadioButtonListener();
@@ -85,11 +89,12 @@ public class EdgeConvertGUI {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
       } catch (Exception e) {
          System.out.println("Error setting native LAF: " + e);
-         //LOGGING ERROR
+         logger.error("Error setting native LAF: {}",e);
       }
       createDTScreen();
       createDRScreen();
       //LOGGING DEBUG 'GUI displaying'
+      logger.debug("GUI displaying");
    } //showGUI()
 
    public void createDTScreen() {//create Define Tables screen
@@ -171,6 +176,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'DTDefineRelations button clicked'
+               logger.info("DTDefineRelations button clicked");
                jfDT.setVisible(false);
                jfDR.setVisible(true); //show the Define Relations screen
                clearDTControls();
@@ -191,6 +197,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse)  {
                //LOGGING 'jlDTTablesAll button clicked'
+               logger.info("jlDTTablesAll button clicked");
                int selIndex = jlDTTablesAll.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDTTablesAll.getElementAt(selIndex).toString();
@@ -215,6 +222,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse) {
                //LOGGING 'jlDTFieldsTablesAll button clicked'
+               logger.info("jlDTFieldsTablesAll button clicked");
                int selIndex = jlDTFieldsTablesAll.getSelectedIndex();
                if (selIndex >= 0) {
                   if (selIndex == 0) {
@@ -253,6 +261,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jbDTMoveUp button clicked'
+               logger.info("jbDTMoveUp button clicked");
                int selection = jlDTFieldsTablesAll.getSelectedIndex();
                currentDTTable.moveFieldUp(selection);
                //repopulate Fields List
@@ -273,6 +282,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jbDTMoveDown button clicked'
+               logger.info("jbDTMoveDown button clicked");
                int selection = jlDTFieldsTablesAll.getSelectedIndex(); //the original selected index
                currentDTTable.moveFieldDown(selection);
                //repopulate Fields List
@@ -324,6 +334,7 @@ public class EdgeConvertGUI {
          new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                //LOGGING 'jcheckDTDisallowNull state changed'
+               logger.info("jcheckDTDisallowNull state changed");
                currentDTField.setDisallowNull(jcheckDTDisallowNull.isSelected());
                dataSaved = false;
             }
@@ -336,6 +347,7 @@ public class EdgeConvertGUI {
          new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                //LOGGING 'jcheckDTPrimaryKey state changed'
+               logger.info("jcheckDTPrimaryKey state changed");
                currentDTField.setIsPrimaryKey(jcheckDTPrimaryKey.isSelected());
                dataSaved = false;
             }
@@ -348,6 +360,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jcheckDTPrimaryKey button clicked'
+               logger.info("jcheckDTPrimaryKey button clicked");
                String prev = jtfDTDefaultValue.getText();
                boolean goodData = false;
                int i = currentDTField.getDataType();
@@ -407,12 +420,13 @@ public class EdgeConvertGUI {
                            goodData = true;
                         }
                         catch (Exception e) {
-                           
+                           //TODO 
                         }
                         break;
                   }
                } while (!goodData);
                //LOGGING 'changes acceptible -- Good Data'
+               logger.info("changes acceptible -- Good Data");
                int selIndex = jlDTFieldsTablesAll.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDTFieldsTablesAll.getElementAt(selIndex).toString();
@@ -432,6 +446,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jbDTVarchar button clicked'
+               logger.info("jbDTVarchar button clicked");
                String prev = jtfDTVarchar.getText();
                String result = (String)JOptionPane.showInputDialog(
                     null,
@@ -559,6 +574,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse)  {
                //LOGGING 'jlDRTablesRelations Value updating'
+               logger.info("jlDRTablesRelations Value updating");
                int selIndex = jlDRTablesRelations.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDRTablesRelations.getElementAt(selIndex).toString();
@@ -589,6 +605,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse)  {
                //LOGGING 'jlDRFieldsTablesRelations Value updating'
+               logger.info("jlDRFieldsTablesRelations Value updating");
                int selIndex = jlDRFieldsTablesRelations.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDRFieldsTablesRelations.getElementAt(selIndex).toString();
@@ -612,6 +629,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse)  {
                //LOGGING 'jlDRTablesRelatedTo Value updating'
+               logger.info("jlDRTablesRelatedTo Value updating");
                int selIndex = jlDRTablesRelatedTo.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDRTablesRelatedTo.getElementAt(selIndex).toString();
@@ -632,6 +650,7 @@ public class EdgeConvertGUI {
          new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent lse)  {
                //LOGGING 'jlDRFieldsTablesRelatedTo Value updating'
+               logger.info("jlDRFieldsTablesRelatedTo Value updating");
                int selIndex = jlDRFieldsTablesRelatedTo.getSelectedIndex();
                if (selIndex >= 0) {
                   String selText = dlmDRFieldsTablesRelatedTo.getElementAt(selIndex).toString();
@@ -672,6 +691,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jbDRDefineTables button clicked'
+               logger.info("jbDRDefineTables button clicked");
                jfDT.setVisible(true); //show the Define Tables screen
                jfDR.setVisible(false);
                clearDRControls();
@@ -687,6 +707,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                //LOGGING 'jbDRBindRelation button clicked'
+               logger.info("jbDRBindRelation button clicked");
                int nativeIndex = jlDRFieldsTablesRelations.getSelectedIndex();
                int relatedField = currentDRField2.getNumFigure();
                if (currentDRField1.getFieldBound() == relatedField) { //the selected fields are already bound to each other
@@ -934,9 +955,11 @@ public class EdgeConvertGUI {
             //close the file
             pw.close();
             //LOGGING 'data saved successfully'
+            logger.info("data saved successfully");
          } catch (IOException ioe) {
             System.out.println(ioe);
             //LOGGING ERROR 'unable to save data: try again'
+            logger.error("unable to save data: try again");
          }
          dataSaved = true;
       }
@@ -1006,6 +1029,7 @@ public class EdgeConvertGUI {
           } catch (IOException ioe) {
               throw new RuntimeException(ioe);
               //LOGGING ERROR 'unable to get output classes'
+              logger.error("unable to get output classes");
           }
       } 
       else {
@@ -1037,18 +1061,23 @@ public class EdgeConvertGUI {
       } catch (InstantiationException ie) {
          ie.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
+         logger.error("unable to get Output Classes: {}",ie);
       } catch (ClassNotFoundException cnfe) {
          cnfe.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
+         logger.error("unable to get Output Classes: {}",cnfe);
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
+         logger.error("unable to get Output Classes: {}",iae);
       } catch (NoSuchMethodException nsme) {
          nsme.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
+         logger.error("unable to get Output Classes: {}",nsme);
       } catch (InvocationTargetException ite) {
          ite.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
+         logger.error("unable to get Output Classes: {}",ite);
       }
       if (alProductNames.size() > 0 && alSubclasses.size() > 0) { //do not recreate productName and objSubClasses arrays if the new path is empty of valid files
          productNames = (String[])alProductNames.toArray(new String[alProductNames.size()]);
@@ -1087,12 +1116,15 @@ public class EdgeConvertGUI {
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
+         logger.error("unable to get SQL Statements: {}",iae);
       } catch (NoSuchMethodException nsme) {
          nsme.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
+         logger.error("unable to get SQL Statements: {}",nsme);
       } catch (InvocationTargetException ite) {
          ite.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
+         logger.error("unable to get SQL Statements: {}",ite);
       }
 
       return strSQLString;
@@ -1129,6 +1161,7 @@ public class EdgeConvertGUI {
          } catch (IOException ioe) {
             System.out.println(ioe);
             //LOGGING 'unable to write SQL'
+            logger.warn("unable to write SQL");
          }
       }
    }
