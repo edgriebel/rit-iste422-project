@@ -37,6 +37,8 @@ public abstract class EdgeConvertCreateDDL {
          for (int j = 0; j < relatedFields.length; j++) { //step through related fields list
             if (relatedFields[j] != 0) {
                numBound++; //count the number of non-zero related fields
+            }else{
+               //LOGGING how many numBound are there 
             }
          }
          numBoundTables[i] = numBound;
