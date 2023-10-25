@@ -10,8 +10,9 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 public class EdgeConvertGUI {
    
@@ -74,7 +75,7 @@ public class EdgeConvertGUI {
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
    
-   private static java.util.logging.Logger logger = LogManager.getLogger(EdgeConnector.class.getName());
+   private static Logger logger = LogManager.getLogger(EdgeConvertFileParser.class);
 
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
@@ -1027,9 +1028,10 @@ public class EdgeConvertGUI {
               }
               resultFiles = filenames.toArray(new File[0]);
           } catch (IOException ioe) {
+               logger.error("unable to get output classes");
               throw new RuntimeException(ioe);
               //LOGGING ERROR 'unable to get output classes'
-              logger.error("unable to get output classes");
+              
           }
       } 
       else {
