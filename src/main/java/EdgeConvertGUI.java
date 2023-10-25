@@ -89,7 +89,6 @@ public class EdgeConvertGUI {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
       } catch (Exception e) {
-         System.out.println("Error setting native LAF: " + e);
          logger.error("Error setting native LAF: {}",e);
       }
       createDTScreen();
@@ -958,7 +957,6 @@ public class EdgeConvertGUI {
             //LOGGING 'data saved successfully'
             logger.info("data saved successfully");
          } catch (IOException ioe) {
-            System.out.println(ioe);
             //LOGGING ERROR 'unable to save data: try again'
             logger.error("unable to save data: try again");
          }
@@ -1020,7 +1018,6 @@ public class EdgeConvertGUI {
       String classLocation = EdgeConvertGUI.class.getResource("EdgeConvertGUI.class").toString();
       if (classLocation.startsWith("jar:")) {
           String jarfilename = classLocation.replaceFirst("^.*:", "").replaceFirst("!.*$", "");
-          System.out.println("Jarfile: " + jarfilename);
           try (JarFile jarfile = new JarFile(jarfilename)) {
               ArrayList<File> filenames = new ArrayList<>();
               for (JarEntry e : Collections.list(jarfile.entries())) {
@@ -1041,7 +1038,6 @@ public class EdgeConvertGUI {
       alSubclasses.clear();
       try {
          for (int i = 0; i < resultFiles.length; i++) {
-         System.out.println(resultFiles[i].getName());
             if (!resultFiles[i].getName().endsWith(".class")) {
                continue; //ignore all files that are not .class files
             }
@@ -1161,9 +1157,8 @@ public class EdgeConvertGUI {
             //close the file
             pw.close();
          } catch (IOException ioe) {
-            System.out.println(ioe);
             //LOGGING 'unable to write SQL'
-            logger.warn("unable to write SQL");
+            logger.warn("unable to write SQL error: "+ ioe);
          }
       }
    }

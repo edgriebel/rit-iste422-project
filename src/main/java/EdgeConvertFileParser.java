@@ -312,11 +312,11 @@ public class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
-         System.out.println("Cannot find \"" + inputFile.getName() + "\".");
+         logger.warn("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
-         System.out.println(ioe);
+         logger.error(ioe);
          System.exit(0);
       } // catch IOException
    } // openFile()
