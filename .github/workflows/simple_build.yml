@@ -8,10 +8,12 @@ on:
   pull_request:
 
 jobs:
-  # Test for presence of build.gradle file
-  # Only run these raw javac if not found
+  # We test for presence of build.gradle file
+  # Run gradle build if found, raw javac if not
+  # NOTE: We need to have the conditional for each run step because
+  #       hashFiles is not supported at [jobs.<jobid>.if], 
+  #       only in [jobs.<jobid>.step.if]
   build-with-shell:
-    if: ${{ hashFiles('build.gradle') == '' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +23,10 @@ jobs:
       with:
         java-version: 1.8
     - name: Build Java Code
+      if: ${{ hashFiles('build.gradle') == '' }}
       run: javac -cp lib/hamcrest-core-1.3.jar:lib/junit-4.12.jar *.java
     - name: Run Unit Tests
+      if: ${{ hashFiles('build.gradle') == '' }}
       run: java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.12.jar org.junit.runner.JUnitCore EdgeConnectorTest
     # Display the files that the action sees in the home directory
     - name: List files
@@ -30,7 +34,6 @@ jobs:
 
   # If there's a build.gradle file then run gradle on it
   build-with-gradle:
-    if: ${{ hashFiles('build.gradle') != '' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -47,9 +50,9 @@ jobs:
         gradle-version: 7.2
     
     - name: Execute Gradle wrapper build
-      if: ${{ hashFiles('gradlew') != '' }}
+      if: ${{ hashFiles('build.gradle') != '' && hashFiles('gradlew') != '' }}
       run: ./gradlew build
     
     - name: Execute Gradle build 
-      if: ${{ hashFiles('gradlew') == '' }}
+      if: ${{ hashFiles('build.gradle') == '' && hashFiles('gradlew') != '' }}
       run: gradle test
