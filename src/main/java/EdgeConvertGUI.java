@@ -10,8 +10,9 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 public class EdgeConvertGUI {
    
@@ -956,9 +957,8 @@ public class EdgeConvertGUI {
             //LOGGING 'data saved successfully'
             logger.info("data saved successfully");
          } catch (IOException ioe) {
-            logger.error("unable to save data: try again");
-            System.out.println(ioe);
             //LOGGING ERROR 'unable to save data: try again'
+            logger.error("unable to save data: try again");
             
          }
          dataSaved = true;
@@ -1019,7 +1019,6 @@ public class EdgeConvertGUI {
       String classLocation = EdgeConvertGUI.class.getResource("EdgeConvertGUI.class").toString();
       if (classLocation.startsWith("jar:")) {
           String jarfilename = classLocation.replaceFirst("^.*:", "").replaceFirst("!.*$", "");
-          System.out.println("Jarfile: " + jarfilename);
           try (JarFile jarfile = new JarFile(jarfilename)) {
               ArrayList<File> filenames = new ArrayList<>();
               for (JarEntry e : Collections.list(jarfile.entries())) {
@@ -1040,7 +1039,6 @@ public class EdgeConvertGUI {
       alSubclasses.clear();
       try {
          for (int i = 0; i < resultFiles.length; i++) {
-         System.out.println(resultFiles[i].getName());
             if (!resultFiles[i].getName().endsWith(".class")) {
                continue; //ignore all files that are not .class files
             }
@@ -1168,9 +1166,8 @@ public class EdgeConvertGUI {
             //close the file
             pw.close();
          } catch (IOException ioe) {
-            System.out.println(ioe);
             //LOGGING 'unable to write SQL'
-            logger.warn("unable to write SQL");
+            logger.warn("unable to write SQL error: "+ ioe);
          }
       }
    }
