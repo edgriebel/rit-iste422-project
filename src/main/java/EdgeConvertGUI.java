@@ -74,7 +74,7 @@ public class EdgeConvertGUI {
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
    
-   private static java.util.logging.Logger logger = LogManager.getLogger(EdgeConnector.class.getName());
+   private static Logger logger = LogManager.getLogger(EdgeConvertGUI.class.getName());
 
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
@@ -88,7 +88,6 @@ public class EdgeConvertGUI {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
       } catch (Exception e) {
-         System.out.println("Error setting native LAF: " + e);
          logger.error("Error setting native LAF: {}",e);
       }
       createDTScreen();
@@ -957,9 +956,10 @@ public class EdgeConvertGUI {
             //LOGGING 'data saved successfully'
             logger.info("data saved successfully");
          } catch (IOException ioe) {
+            logger.error("unable to save data: try again");
             System.out.println(ioe);
             //LOGGING ERROR 'unable to save data: try again'
-            logger.error("unable to save data: try again");
+            
          }
          dataSaved = true;
       }
@@ -1027,9 +1027,10 @@ public class EdgeConvertGUI {
               }
               resultFiles = filenames.toArray(new File[0]);
           } catch (IOException ioe) {
+            logger.error("unable to get output classes");
               throw new RuntimeException(ioe);
               //LOGGING ERROR 'unable to get output classes'
-              logger.error("unable to get output classes");
+              
           }
       } 
       else {
@@ -1059,25 +1060,30 @@ public class EdgeConvertGUI {
             }
          }
       } catch (InstantiationException ie) {
+         logger.error("unable to get Output Classes: {}",ie);
          ie.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
-         logger.error("unable to get Output Classes: {}",ie);
+         
       } catch (ClassNotFoundException cnfe) {
+         logger.error("unable to get Output Classes: {}",cnfe);
          cnfe.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
-         logger.error("unable to get Output Classes: {}",cnfe);
+         
       } catch (IllegalAccessException iae) {
+         logger.error("unable to get Output Classes: {}",iae);
          iae.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
-         logger.error("unable to get Output Classes: {}",iae);
+         
       } catch (NoSuchMethodException nsme) {
+         logger.error("unable to get Output Classes: {}",nsme);
          nsme.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
-         logger.error("unable to get Output Classes: {}",nsme);
+         
       } catch (InvocationTargetException ite) {
+         logger.error("unable to get Output Classes: {}",ite);
          ite.printStackTrace();
          //LOGGING ERROR 'unable to get Output Classes'
-         logger.error("unable to get Output Classes: {}",ite);
+         
       }
       if (alProductNames.size() > 0 && alSubclasses.size() > 0) { //do not recreate productName and objSubClasses arrays if the new path is empty of valid files
          productNames = (String[])alProductNames.toArray(new String[alProductNames.size()]);
@@ -1114,17 +1120,20 @@ public class EdgeConvertGUI {
          strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
          databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], null);
       } catch (IllegalAccessException iae) {
+         logger.error("unable to get SQL Statements: {}",iae);
          iae.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
-         logger.error("unable to get SQL Statements: {}",iae);
+         
       } catch (NoSuchMethodException nsme) {
+         logger.error("unable to get SQL Statements: {}",nsme);
          nsme.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
-         logger.error("unable to get SQL Statements: {}",nsme);
+         
       } catch (InvocationTargetException ite) {
+         logger.error("unable to get SQL Statements: {}",ite);
          ite.printStackTrace();
          //LOGGING ERROR 'unable to get SQL Statements'
-         logger.error("unable to get SQL Statements: {}",ite);
+         
       }
 
       return strSQLString;
