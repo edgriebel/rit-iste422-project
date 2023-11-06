@@ -39,3 +39,5 @@ debugLogs.txt
 errorLogs.txt
 infoLogs.txt
 warningLogs.txt
+*.txt
+

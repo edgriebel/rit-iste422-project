@@ -41,7 +41,7 @@ public abstract class EdgeConvertCreateDDL {
             if (relatedFields[j] != 0) {
                numBound++; //count the number of non-zero related fields
             }else{
-               //LOGGING how many numBound are there 
+               logger.info("number of non-zero fields are: {}", numBound);
             }
          }
          numBoundTables[i] = numBound;
