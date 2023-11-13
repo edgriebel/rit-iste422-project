@@ -18,8 +18,6 @@ import org.junit.Test;
 public class EdgeTableTest{
 
     public static EdgeTable testTable;
-    public static NoSuchElementException nseException;
-    public static NumberFormatException nfException;
 
     @Before
     public void createTable(){
@@ -40,6 +38,42 @@ public class EdgeTableTest{
         testTable = new EdgeTable(inputString);
         assertEquals("test",-15, testTable.getNumFigure());
         assertEquals("test","Weather", testTable.getName());
+    }
+
+    @Test
+    public void testCreateTableNoString() throws NoSuchElementException{
+        String inputString = "10|";
+        try {
+            testTable = new EdgeTable(inputString);
+            testTable.getName();
+            fail("Exception not thrown");
+        } catch (NoSuchElementException e) {
+            assertEquals(e.getMessage(), e.getMessage());
+        }
+    }
+
+    @Test
+    public void testCreateTableNoName() throws NoSuchElementException{
+        String inputString = "10";
+        try {
+            testTable = new EdgeTable(inputString);
+            testTable.getName();
+            fail("Exception not thrown");
+        } catch (NoSuchElementException e) {
+            assertEquals(e.getMessage(), e.getMessage());
+        }
+    }
+
+    @Test
+    public void testCreateTableStringNum() throws NumberFormatException{
+        String inputString = "Apple|Fruit";
+        try {
+            testTable = new EdgeTable(inputString);
+            testTable.getNumFigure();
+            fail("Exception not thrown");
+        } catch (NumberFormatException e) {
+            assertEquals(e.getMessage(), e.getMessage());
+        }
     }
 
     @Test
@@ -104,7 +138,6 @@ public class EdgeTableTest{
         testTable.makeArrays();
         testTable.moveFieldUp(midIndex);
         assertEquals("test", 2, testTable.getNativeFieldsArray()[0]);
-        // assertEquals("test", 2, testTable.getRelatedFieldsArray()[0]);
     }
 
     @Test
@@ -119,7 +152,6 @@ public class EdgeTableTest{
         testTable.makeArrays();
         testTable.moveFieldDown(midIndex);
         assertEquals("test", 2, testTable.getNativeFieldsArray()[2]);
-        // assertEquals("test", 2, testTable.getRelatedFieldsArray()[2]);
     }
 
     @Test
@@ -133,7 +165,6 @@ public class EdgeTableTest{
         testTable.makeArrays();
         testTable.moveFieldUp(0);
         assertEquals("test", 1, testTable.getNativeFieldsArray()[0]);
-        // assertEquals("test", 1, testTable.getRelatedFieldsArray()[0]);
     }
 
     @Test
@@ -147,40 +178,99 @@ public class EdgeTableTest{
         testTable.makeArrays();
         testTable.moveFieldDown(2);
         assertEquals("test", 3, testTable.getNativeFieldsArray()[2]);
-        // assertEquals("test", 3, testTable.getRelatedFieldsArray()[2]);
     }
 
+    @Test
+    public void testSetRelatedFields(){
+        testTable.addNativeField(1);
+        testTable.addNativeField(2);
+        testTable.addNativeField(3);
+        testTable.addNativeField(4);
+        testTable.addNativeField(5);
+        testTable.addNativeField(6);
+        testTable.makeArrays();
+        testTable.setRelatedField(2, 5);
+        testTable.setRelatedField(0, 100);
+        testTable.setRelatedField(5, 1);
+        assertEquals(5, testTable.getRelatedFieldsArray()[2]);
+        assertEquals(100, testTable.getRelatedFieldsArray()[0]);
+        assertEquals(1, testTable.getRelatedFieldsArray()[5]);
+    }
 
+    @Test
+    public void testSetRelatedFieldsNegative(){
+        testTable.addNativeField(1);
+        testTable.addNativeField(2);
+        testTable.addNativeField(3);
+        testTable.addNativeField(4);
+        testTable.addNativeField(5);
+        testTable.addNativeField(6);
+        testTable.makeArrays();
+        testTable.setRelatedField(0, -15);   
+        testTable.setRelatedField(5, -150);
+        assertEquals(-15, testTable.getRelatedFieldsArray()[0]);   
+        assertEquals(-150, testTable.getRelatedFieldsArray()[5]);   
+    }
 
+    @Test
+    public void testSetRelatedFieldsOutOfBounds() throws IndexOutOfBoundsException{
+        testTable.addNativeField(1);
+        testTable.addNativeField(2);
+        testTable.addNativeField(3);
+        testTable.addNativeField(4);
+        testTable.addNativeField(5);
+        testTable.addNativeField(6);
+        testTable.makeArrays();
+        try {
+            testTable.setRelatedField(-2, 5);   
+            testTable.setRelatedField(20, 43);
+            fail("Exception not thrown");
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals(e.getMessage(), e.getMessage());
+        } 
+    }
 
-//     public void testCreateTableNoString() throws NoSuchElementException{
-//         String inputString = "10|";
-//         testTable = new EdgeTable(inputString);
-//         assertEquals("test",10, testTable.getNumFigure());
-//         Throwable exception = Assert.assertThrows(
-//       NoSuchElementException.class, 
-//       () -> {
-//           throw new IllegalArgumentException("Exception message");
-//       }
-//     );
-//     assertEquals("Exception message", exception.getMessage());
-//     testTable.getName();
-//     }
+    @Test
+    public void testMoveFieldDownRelatedFields(){
+        testTable.addNativeField(1);
+        testTable.addNativeField(2);
+        testTable.addNativeField(3);
+        testTable.addNativeField(4);
+        testTable.addNativeField(5);
+        testTable.addNativeField(6);
+        testTable.makeArrays();
+        testTable.setRelatedField(2, 5);
+        testTable.moveFieldDown(2);
+        assertEquals("test", 5, testTable.getRelatedFieldsArray()[3]);   
+    }
 
+    @Test
+    public void testMoveFieldUpRelatedFields(){
+        testTable.addNativeField(1);
+        testTable.addNativeField(2);
+        testTable.addNativeField(3);
+        testTable.addNativeField(4);
+        testTable.addNativeField(5);
+        testTable.addNativeField(6);
+        testTable.makeArrays();
+        testTable.setRelatedField(5, 1);
+        testTable.moveFieldUp(5);
+        assertEquals(1, testTable.getRelatedFieldsArray()[4]);
+    }
 
-//     public void testCreateTableNoName() throws NoSuchElementException{
-//         String inputString = "10";
-//         testTable = new EdgeTable(inputString);
-//         assertEquals("test",10, testTable.getNumFigure());
-//         assertEquals("test",nseException, testTable.getName());
-//     }
-
-//     @Test
-//     public void testCreateTableStringNum() throws NumberFormatException{
-//         String inputString = "Apple|Fruit";
-//         testTable = new EdgeTable(inputString);
-//         assertEquals("test",nfException, testTable.getNumFigure());
-//         assertEquals("test","Frozen", testTable.getName());
-//     }
+    @Test
+    public void testMakeArraysTwice(){
+        testTable.addRelatedTable(6);
+        testTable.addRelatedTable(10);
+        testTable.addRelatedTable(14);
+        testTable.addRelatedTable(12);
+        testTable.makeArrays();
+        testTable.addRelatedTable(0);
+        testTable.addRelatedTable(104);
+        testTable.addRelatedTable(55);
+        testTable.makeArrays();
+        assertEquals(7, testTable.getRelatedTablesArray().length);
+        assertEquals(55, testTable.getRelatedTablesArray()[6]);
+    }
 
 }
