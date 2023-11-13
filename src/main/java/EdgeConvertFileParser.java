@@ -27,6 +27,7 @@ public class EdgeConvertFileParser {
    private int endPoint1, endPoint2;
    private int numLine;
    private String endStyle1, endStyle2;
+   public boolean testFailed = false;
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
@@ -307,6 +308,7 @@ public class EdgeConvertFileParser {
                br.close();
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
+               testFailed = true;
                JOptionPane.showMessageDialog(null, "Unrecognized file format");
             }
          }
