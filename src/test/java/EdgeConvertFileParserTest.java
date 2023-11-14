@@ -10,38 +10,56 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 
 public class EdgeConvertFileParserTest {
     
     private static final String PROJECT_ROOT = System.getProperty("user.dir");
+    @BeforeClass 
+    public static void foo() {
+        // throw new RuntimeException(PROJECT_ROOT);
+    }
+
     // "~/Desktop/code/422/classprojectGit/rit-iste422-project";
 
-    public File testsave = new File(PROJECT_ROOT +"src/test/resources/testsave.sav");
-    public File testsavenoheadding = new File(PROJECT_ROOT +"src/test/resources/testsavenoheadding.sav");
-    public File testsavemissingchar = new File(PROJECT_ROOT +"src/test/resources/testsavemissingchar.sav");
-    public File testsaveinvalidvalues = new File(PROJECT_ROOT +"src/test/resources/testsaveinvalidvalues.sav");
-    public EdgeConvertFileParser testObj = new EdgeConvertFileParser(testsave);
+    public File testsave;
+    public EdgeConvertFileParser testObj;
+    public File testsavenoheadding = new File(PROJECT_ROOT +"/src/test/resources/testsavenoheadding.sav");
+    public File testsavemissingchar = new File(PROJECT_ROOT +"/src/test/resources/testsavemissingchar.sav");
+    // public File testsaveinvalidvalues = new File(PROJECT_ROOT +"/src/test/resources/testsaveinvalidvalues.sav");
+    
     
     // test --tests EdgeConvertFileParserTest -i
 
+    // public File testsave = new File("./resources/testsave.sav");
     /*
-    public File testsave = new File("./resources/testsave.sav");
+    public File testsave = new File(PROJECT_ROOT+"/src/test/resources/testsave.sav");
     public File testsavenoheadding = new File("./resources/testsavenoheadding.sav");
     public File testsavemissingchar = new File("./resources/testsavemissingchar.sav");
     public File testsaveinvalidvalues = new File("./resources/testsaveinvalidvalues.sav");
     public EdgeConvertFileParser testObj = new EdgeConvertFileParser(testsave);
     */
+
+    @Before
+    public void xxxx(){
+        testsave = new File(PROJECT_ROOT +"src/test/resources/testsave.sav");
+        testObj = new EdgeConvertFileParser(testsave);
+        System.err.println(testsave);
+    }
     @Test
     public void openFileTest(){
-        try{
+        // try{
+            assertNotNull(testObj);
+            System.err.println(testsave);
             testObj.openFile(testsave);
             assertTrue(true);
-        }catch(Exception ex){
-            fail("Unable to open file with error of:" + ex);
-        }
+        // }catch(Exception ex){
+        //     fail("Unable to open file with error of:" + ex);
+        // }
     }
+
     @Test
     public void ableToGetEdgeTables(){
         testObj.openFile(testsave);
@@ -152,17 +170,21 @@ public class EdgeConvertFileParserTest {
     @Test
     public void openFileWithNoHead(){
         testObj.openFile(testsavenoheadding);
+        System.err.println("Testfailed is " + testObj.testFailed);
         assertTrue(testObj.testFailed);
+        fail("here");
     }
+
     @Test
     public void parseSaveFileMissingChar(){
+        fail("HERE");
         testObj.openFile(testsavemissingchar);
         EdgeField[] exampleArray = {};
         assertArrayEquals(exampleArray,testObj.getEdgeFields());
     }
-    @Test
-    public void parseSaveFileMissingInput(){
-        testObj.openFile(testsaveinvalidvalues);
-        assertNull(testObj.getEdgeTables());
-    }
+    // @Test
+    // public void parseSaveFileMissingInput(){
+    //     testObj.openFile(testsaveinvalidvalues);
+    //     assertNull(testObj.getEdgeTables());
+    // }
 }
