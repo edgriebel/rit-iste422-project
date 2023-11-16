@@ -320,6 +320,7 @@ public class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
+         testFailed = true;
          logger.warn("Cannot find \"" + inputFile.getName() + "\".");
          if (fatalError) {
              System.exit(0);
