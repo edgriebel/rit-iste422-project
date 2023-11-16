@@ -291,6 +291,10 @@ public class EdgeConvertFileParser {
    }
    
    public void openFile(File inputFile) {
+      openFile(inputFile, true);
+  }
+
+  public void openFile(File inputFile, boolean fatalError) {
       try {
          fr = new FileReader(inputFile);
          br = new BufferedReader(fr);
@@ -309,17 +313,23 @@ public class EdgeConvertFileParser {
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
                testFailed = true;
-               JOptionPane.showMessageDialog(null, "Unrecognized file format");
+               if (fatalError) {
+                  JOptionPane.showMessageDialog(null, "Unrecognized file format");
+              }
             }
          }
       } // try
       catch (FileNotFoundException fnfe) {
          logger.warn("Cannot find \"" + inputFile.getName() + "\".");
-         System.exit(0);
-      } // catch FileNotFoundException
-      catch (IOException ioe) {
+         if (fatalError) {
+             System.exit(0);
+         }
+     } // catch FileNotFoundException
+     catch (IOException ioe) {
          logger.error(ioe);
-         System.exit(0);
-      } // catch IOException
+         if (fatalError) {
+             System.exit(0);
+         }
+     } // catch IOException
    } // openFile()
 } // EdgeConvertFileHandler
