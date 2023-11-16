@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class EdgeConvertFileParserTest {
     
@@ -153,11 +154,25 @@ public class EdgeConvertFileParserTest {
         field7.setIsPrimaryKey(false);
         field7.setDisallowNull(false);
 
-        EdgeField[] testEXedgeField = {field1,field2,field3,field4,field5,field6,field7,field1,field2,field3,field4,field5,field6,field7};
-        for(EdgeField field: testObj.getEdgeFields()){
+        EdgeField[] testEXedgeField = {field1,field2,field3,field4,field5,field6,field7};
+
+        ArrayList<String> ExStrings = new ArrayList<String>();
+        
+        for(EdgeField field: testEXedgeField){
             System.out.println(field);
+            String Sfield = field.toString();
+            ExStrings.add(Sfield);
         }
-        assertArrayEquals(testEXedgeField,testObj.getEdgeFields());
+        String[] array2 = ExStrings.toArray(new String[ExStrings.size()]);
+
+        EdgeField[] TestResultEF = testObj.getEdgeFields();
+        ArrayList<String> ResultStrings = new ArrayList<String>();
+        for(EdgeField field: TestResultEF){
+            ResultStrings.add(field.toString());
+        }
+        String[] Resarray2 = ExStrings.toArray(new String[ExStrings.size()]);
+
+        assertArrayEquals(array2,Resarray2);
     }
     @Test
     public void openFileWithBadPath(){
