@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 public class EdgeTable {
    private int numFigure;
    private String name;
-   private ArrayList alRelatedTables, alNativeFields;
+   private ArrayList<Integer> alRelatedTables, alNativeFields;
    private int[] relatedTables, relatedFields, nativeFields;
    private static Logger logger = LogManager.getLogger(EdgeConnector.class.getName());
 
@@ -17,8 +17,8 @@ public class EdgeTable {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
-      alRelatedTables = new ArrayList();
-      alNativeFields = new ArrayList();
+      alRelatedTables = new ArrayList<Integer>();
+      alNativeFields = new ArrayList<Integer>();
    }
    
    public int getNumFigure() {
@@ -32,7 +32,7 @@ public class EdgeTable {
    }
    
    public void addRelatedTable(int relatedTable) {
-      alRelatedTables.add(new Integer(relatedTable));
+      alRelatedTables.add(relatedTable);
       logger.debug("add Related Table");
    }
    
@@ -58,7 +58,7 @@ public class EdgeTable {
 
    public void addNativeField(int value) {
       logger.debug("add Native Field");
-      alNativeFields.add(new Integer(value));
+      alNativeFields.add(value);
    }
 
    public void moveFieldUp(int index) { //move the field closer to the beginning of the list
