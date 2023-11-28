@@ -323,13 +323,15 @@ public class EdgeConvertFileParser {
          testFailed = true;
          logger.warn("Cannot find \"" + inputFile.getName() + "\".");
          if (fatalError) {
-             System.exit(0);
+            JOptionPane.showMessageDialog(null, "File Not Found");
+            //System.exit(0);
          }
      } // catch FileNotFoundException
      catch (IOException ioe) {
          logger.error(ioe);
          if (fatalError) {
-             System.exit(0);
+            JOptionPane.showMessageDialog(null, "Failure encountered while reading/writing");
+            //System.exit(0);
          }
      } // catch IOException
    } // openFile()
