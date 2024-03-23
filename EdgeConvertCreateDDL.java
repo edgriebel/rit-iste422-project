@@ -55,9 +55,11 @@ public abstract class EdgeConvertCreateDDL {
    }
    
    protected EdgeTable getTable(int numFigure) {
-      for (int tIndex = 0; tIndex < tables.length; tIndex++) {
-         if (numFigure == tables[tIndex].getNumFigure()) {
-            return tables[tIndex];
+      try{
+         for (int tIndex = 0; tIndex < tables.length; tIndex++) {
+            if (numFigure == tables[tIndex].getNumFigure()) {
+               return tables[tIndex];
+            }
          }
       }
       catch (Exception e) {
@@ -69,9 +71,11 @@ public abstract class EdgeConvertCreateDDL {
    }
    
    protected EdgeField getField(int numFigure) {
-      for (int fIndex = 0; fIndex < fields.length; fIndex++) {
-         if (numFigure == fields[fIndex].getNumFigure()) {
-            return fields[fIndex];
+      try{
+         for (int fIndex = 0; fIndex < fields.length; fIndex++) {
+            if (numFigure == fields[fIndex].getNumFigure()) {
+               return fields[fIndex];
+            }
          }
       }
       catch (Exception e) {
