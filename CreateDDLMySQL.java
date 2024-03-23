@@ -156,7 +156,11 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
 
    public String getSQLString() {
-      createDDL();
+      try {
+         createDDL();
+      } catch (Exception e) {
+         logger.error("Error creating DDL: " + e.getMessage(), e);
+      }
       return sb.toString();
    }
    
