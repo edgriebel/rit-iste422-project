@@ -28,6 +28,7 @@ public abstract class EdgeConvertCreateDDL {
    } //EdgeConvertCreateDDL()
 
    public void initialize() {
+      try{
       logger.info("Starting initialization.");
       numBoundTables = new int[tables.length];
       maxBound = 0;
@@ -46,6 +47,11 @@ public abstract class EdgeConvertCreateDDL {
             maxBound = numBound;
          }
       }
+   }catch(Exception e){
+      System.err.println("Fatal error occurred: " + e.getMessage());
+      logger.log(Level.SEVERE, "Fatal error occurred: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
+   }
    }
    
    protected EdgeTable getTable(int numFigure) {

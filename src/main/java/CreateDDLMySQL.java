@@ -28,6 +28,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public void createDDL() {
+      try{
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       logger.info("Database Name set to " + databaseName);
@@ -108,6 +109,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
          }
       }
       logger.info("DDLCreation finished");
+   }catch(Exception e){
+      logger.log(Level.SEVERE, "Fatal error occurred while creating DDL: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
+   }
 
    }
 
@@ -120,6 +125,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public String generateDatabaseName() { //prompts user for database name
+      try{
       String dbNameDefault = "MySQLDB";
       //String databaseName = "";
 
@@ -142,6 +148,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
          }
       } while (databaseName.equals(""));
+   }catch(Exception e){
+      logger.log(Level.SEVERE, "Fatal error occurred while creating DDL: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
+   }
       return databaseName;
    }
    
