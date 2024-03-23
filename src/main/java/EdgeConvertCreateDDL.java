@@ -55,29 +55,35 @@ public abstract class EdgeConvertCreateDDL {
    }
    
    protected EdgeTable getTable(int numFigure) {
-      for (int tIndex = 0; tIndex < tables.length; tIndex++) {
-         if (numFigure == tables[tIndex].getNumFigure()) {
-            logger.info("Table found at index" + tIndex);
-            return tables[tIndex];
+      try{
+         for (int tIndex = 0; tIndex < tables.length; tIndex++) {
+            if (numFigure == tables[tIndex].getNumFigure()) {
+               logger.info("Table found at index" + tIndex);
+               return tables[tIndex];
+            }
          }
       }
+      
       catch (Exception e) {
          // tracing using sysout
          System.err.println("Error occurred while retrieving table: " + e.getMessage());
-         logger.error("Error occurred while retrieving table: " + e.getMessage(), e);
+         // logger.error("Error occurred while retrieving table: " + e.getMessage(), e);
       }
       return null;
    }
    
    protected EdgeField getField(int numFigure) {
-      for (int fIndex = 0; fIndex < fields.length; fIndex++) {
-         if (numFigure == fields[fIndex].getNumFigure()) {
-            logger.info("Field found at index " + fIndex );
-            return fields[fIndex];
+      try{
+         for (int fIndex = 0; fIndex < fields.length; fIndex++) {
+            if (numFigure == fields[fIndex].getNumFigure()) {
+               logger.info("Field found at index " + fIndex );
+               return fields[fIndex];
+            }
          }
       }
+      
       catch (Exception e) {
-         logger.error("Error occurred while retrieving field: " + e.getMessage(), e);
+         // logger.error("Error occurred while retrieving field: " + e.getMessage(), e);
       }
       return null;
    }

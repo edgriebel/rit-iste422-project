@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.LoggerFactory;
 
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
@@ -167,7 +167,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       try {
          createDDL();
       } catch (Exception e) {
-         logger.error("Error creating DDL: " + e.getMessage(), e);
+         // logger.error("Error creating DDL: " + e.getMessage(), e);
       }
       return sb.toString();
    }

@@ -28,7 +28,7 @@ public class EdgeConvertFileParser {
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
-   public Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
+   // public Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
    
    public EdgeConvertFileParser(File constructorFile) {
       numFigure = 0;
@@ -312,12 +312,12 @@ public class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
-         logger.error("Cannot find file: " + inputFile.getName(), fnfe);
+         // logger.error("Cannot find file: " + inputFile.getName(), fnfe);
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
-         logger.error("IO Exception occurred: " + ioe.getMessage(), ioe);
+         // logger.error("IO Exception occurred: " + ioe.getMessage(), ioe);
          System.out.println(ioe);
          System.exit(0);
       } // catch IOException
