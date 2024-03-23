@@ -4,8 +4,11 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public abstract class EdgeConvertCreateDDL {
+   private static final Logger logger = Logger.getLogger(EdgeConvertCreateDDL.class.getName());
    static String[] products = {"MySQL"};
    protected EdgeTable[] tables; //master copy of EdgeTable objects
    protected EdgeField[] fields; //master copy of EdgeField objects
@@ -25,6 +28,7 @@ public abstract class EdgeConvertCreateDDL {
    } //EdgeConvertCreateDDL()
 
    public void initialize() {
+      try{
       numBoundTables = new int[tables.length];
       maxBound = 0;
       sb = new StringBuffer();
@@ -42,6 +46,10 @@ public abstract class EdgeConvertCreateDDL {
             maxBound = numBound;
          }
       }
+   }catch(Exception e){
+      logger.log(Level.SEVERE, "Fatal error occurred: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
+   }
    }
    
    protected EdgeTable getTable(int numFigure) {

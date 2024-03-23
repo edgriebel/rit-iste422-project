@@ -4,9 +4,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import org.slf4j.LoggerFactory;
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
-
+   private static final Logger logger = Logger.getLogger(CreateDDLMySQL.class.getName());
    protected String databaseName;
    //this array is for determining how MySQL refers to datatypes
    protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
@@ -22,6 +26,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public void createDDL() {
+      try{
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
@@ -98,6 +103,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             }
          }
       }
+   }catch(Exception e){
+      logger.log(Level.SEVERE, "Fatal error occurred while creating DDL: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
+   }
    }
 
    protected int convertStrBooleanToInt(String input) { //MySQL uses '1' and '0' for boolean types
@@ -109,6 +118,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public String generateDatabaseName() { //prompts user for database name
+      try{
       String dbNameDefault = "MySQLDB";
       //String databaseName = "";
 
@@ -129,8 +139,13 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             JOptionPane.showMessageDialog(null, "You must select a name for your database.");
          }
       } while (databaseName.equals(""));
-      return databaseName;
+   }catch(Exception e){
+      logger.log(Level.SEVERE, "Fatal error occurred while creating DDL: " + e.getMessage(), e);
+      EdgeConvertGUI.setReadSuccess(false);
    }
+   return databaseName;
+   }
+
    
    public String getDatabaseName() {
       return databaseName;
