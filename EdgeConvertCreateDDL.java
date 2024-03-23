@@ -58,7 +58,7 @@ public abstract class EdgeConvertCreateDDL {
             return tables[tIndex];
          }
       }
-      } catch (Exception e) {
+      catch (Exception e) {
          logger.error("Error occurred while retrieving table: " + e.getMessage(), e);
       }
       return null;
@@ -70,7 +70,7 @@ public abstract class EdgeConvertCreateDDL {
             return fields[fIndex];
          }
       }
-         } catch (Exception e) {
+      catch (Exception e) {
             logger.error("Error occurred while retrieving field: " + e.getMessage(), e);
       }
       return null;
