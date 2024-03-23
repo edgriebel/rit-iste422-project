@@ -7,9 +7,12 @@ import java.io.*;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.lang.reflect.*;
 
 public class EdgeConvertGUI {
+   private static final Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
    
    public static final int HORIZ_SIZE = 635;
    public static final int VERT_SIZE = 400;
@@ -82,6 +85,7 @@ public class EdgeConvertGUI {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
       } catch (Exception e) {
+         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);
          System.out.println("Error setting native LAF: " + e);
       }
       createDTScreen();
