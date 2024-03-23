@@ -67,7 +67,7 @@ public abstract class EdgeConvertCreateDDL {
       catch (Exception e) {
          // tracing using sysout
          System.err.println("Error occurred while retrieving table: " + e.getMessage());
-         logger.log(Level.WARNING, "Error occurred while retrieving table: " + e.getMessage(), e);
+         logger.log(Level.WARNING, "Error occurred while retrieving table: " + e.getMessage(), e);//error logs
       }
       return null;
    }
@@ -83,7 +83,7 @@ public abstract class EdgeConvertCreateDDL {
       }
       
       catch (Exception e) {
-         logger.log(Level.WARNING, "Error occurred while retrieving field: " + e.getMessage(), e);
+         logger.log(Level.WARNING, "Error occurred while retrieving field: " + e.getMessage(), e);//error logs
       }
       return null;
    }

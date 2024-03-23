@@ -85,7 +85,7 @@ public class EdgeConvertGUI {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
       } catch (Exception e) {
-         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);
+         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);//error logs
          System.out.println("Error setting native LAF: " + e);
       }
       createDTScreen();

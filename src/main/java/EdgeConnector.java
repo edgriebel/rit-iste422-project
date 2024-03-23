@@ -22,7 +22,7 @@ public class EdgeConnector {
          isEP2Table = false;
       }
       catch(Exception e){
-         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);
+         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);//error logs
       }
    }
    
