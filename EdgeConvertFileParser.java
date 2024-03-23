@@ -1,8 +1,11 @@
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class EdgeConvertFileParser {
+   private static final Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
    //private String filename = "test.edg";
    private File parseFile;
    private FileReader fr;
@@ -299,15 +302,18 @@ public class EdgeConvertFileParser {
                br.close();
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
+               logger.error("Unrecognized file format: " + inputFile.getName());
                JOptionPane.showMessageDialog(null, "Unrecognized file format");
             }
          }
       } // try
       catch (FileNotFoundException fnfe) {
+         logger.error("Cannot find file: " + inputFile.getName(), fnfe);
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
+         logger.error("IO Exception occurred: " + ioe.getMessage(), ioe);
          System.out.println(ioe);
          System.exit(0);
       } // catch IOException
