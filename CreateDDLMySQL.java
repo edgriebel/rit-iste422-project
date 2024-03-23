@@ -29,6 +29,8 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       try{
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
+      // tracing -jason 
+      logger.info("Creating database: " + databaseName);
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
       sb.append("USE " + databaseName + ";\r\n");
       for (int boundCount = 0; boundCount <= maxBound; boundCount++) { //process tables in order from least dependent (least number of bound tables) to most dependent
@@ -42,6 +44,8 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                int numForeignKey = 0;
                for (int nativeFieldCount = 0; nativeFieldCount < nativeFields.length; nativeFieldCount++) { //print out the fields
                   EdgeField currentField = getField(nativeFields[nativeFieldCount]);
+                  // tracing -jason 
+                  logger.info("Processing field: " + currentField.getName());
                   sb.append("\t" + currentField.getName() + " " + strDataType[currentField.getDataType()]);
                   if (currentField.getDataType() == 0) { //varchar
                      sb.append("(" + currentField.getVarcharValue() + ")"); //append varchar length in () if data type is varchar
