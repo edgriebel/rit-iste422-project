@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import org.slf4j.LoggerFactory;
 
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
@@ -151,7 +154,11 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
 
    public String getSQLString() {
-      createDDL();
+      try {
+         createDDL();
+      } catch (Exception e) {
+         logger.error("Error creating DDL: " + e.getMessage(), e);
+      }
       return sb.toString();
    }
    
