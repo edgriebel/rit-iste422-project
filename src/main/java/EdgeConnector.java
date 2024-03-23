@@ -1,4 +1,5 @@
 import java.util.StringTokenizer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdgeConnector {
@@ -8,16 +9,21 @@ public class EdgeConnector {
    private boolean isEP1Field, isEP2Field, isEP1Table, isEP2Table;
       
    public EdgeConnector(String inputString) {
-      StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
-      numConnector = Integer.parseInt(st.nextToken());
-      endPoint1 = Integer.parseInt(st.nextToken());
-      endPoint2 = Integer.parseInt(st.nextToken());
-      endStyle1 = st.nextToken();
-      endStyle2 = st.nextToken();
-      isEP1Field = false;
-      isEP2Field = false;
-      isEP1Table = false;
-      isEP2Table = false;
+      try{
+         StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
+         numConnector = Integer.parseInt(st.nextToken());
+         endPoint1 = Integer.parseInt(st.nextToken());
+         endPoint2 = Integer.parseInt(st.nextToken());
+         endStyle1 = st.nextToken();
+         endStyle2 = st.nextToken();
+         isEP1Field = false;
+         isEP2Field = false;
+         isEP1Table = false;
+         isEP2Table = false;
+      }
+      catch(Exception e){
+         logger.log(Level.WARNING, "An unexpected error occurred: " + e.getMessage(), e);//error logs
+      }
    }
    
    public int getNumConnector() {
