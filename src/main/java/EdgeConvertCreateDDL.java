@@ -5,7 +5,7 @@ import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
-
+import java.util.logging.Level;
 
 public abstract class EdgeConvertCreateDDL {
    protected Logger logger = Logger.getLogger(EdgeConvertCreateDDL.class.getName());
@@ -55,6 +55,11 @@ public abstract class EdgeConvertCreateDDL {
             return tables[tIndex];
          }
       }
+      catch (Exception e) {
+         // tracing using sysout
+         System.err.println("Error occurred while retrieving table: " + e.getMessage());
+         logger.error("Error occurred while retrieving table: " + e.getMessage(), e);
+      }
       return null;
    }
    
@@ -64,6 +69,9 @@ public abstract class EdgeConvertCreateDDL {
             logger.info("Field found at index " + fIndex );
             return fields[fIndex];
          }
+      }
+      catch (Exception e) {
+         logger.error("Error occurred while retrieving field: " + e.getMessage(), e);
       }
       return null;
    }
